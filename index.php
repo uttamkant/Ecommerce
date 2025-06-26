@@ -93,7 +93,8 @@
   </div>
 </div>
          </div>
-          <div class="col-md-4"><div class="card" style="width: 18rem;">
+          <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
   <img src="./images/t-shrit.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
@@ -103,9 +104,9 @@
   </div>
 </div>
 </div>
-           <div class="col-md-4">
+           <div class="col-md-4 mb-2">
             <div class="card" style="width: 18rem;">
-  <img src="./images/book.jpg" class="card-img-top" alt="...">
+  <img src="./images/pen.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
@@ -115,9 +116,9 @@
 
    
              </div>
-              <div class="col-md-4">
+              <div class="col-md-4 me-2">
             <div class="card" style="width: 18rem;">
-  <img src="./images/book.jpg" class="card-img-top" alt="...">
+  <img src="./images/toy.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
@@ -144,7 +145,7 @@
            </div>
              <div class="col-md-4">
             <div class="card" style="width: 18rem;">
-  <img src="./images/book.jpg" class="card-img-top" alt="...">
+  <img src="./images/jeans.jpg" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and 
@@ -163,11 +164,56 @@
 <div class="col-md-2 bg-secondary p-0">
   <ul class="navbar-nav me-auto text-center">
     <li class="nav-item bg-info">
-      <a href="" class="nav-link">Delivery Brands</a>
+      <a href="#" class="nav-link text-center">Delivery Brands</a>
+    </li>
+
+     <li class="nav-item">
+      <a href="#" class="nav-link text-center"> Brand1</a>
+    </li>
+
+     <li class="nav-item">
+      <a href="#" class="nav-link text-center">Brand2</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-center">Brand3</a>
+    </li>
+<li class="nav-item">
+      <a href="#" class="nav-link text-center">Brand4</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-center">Brand5</a>
     </li>
   </ul>
-</div>
 
+</div>
+<div class="col-md-2 bg-secondary p-0">
+  <!--brands to be displayed-->
+  <ul class="navbar-nav me-auto text-center">
+</ul>
+
+<!--categories to be displayed--> 
+<a href="#" class="nav-link text-center bg-info">Categories</a>
+    </li>
+
+     <li class="nav-item">
+      <a href="#" class="nav-link text-center"> Categories1</a>
+    </li>
+
+     <li class="nav-item">
+      <a href="#" class="nav-link text-center">Categories2</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-center">Categories3</a>
+    </li>
+<li class="nav-item">
+      <a href="#" class="nav-link text-center">Categories4</a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-center">Categories5</a>
+    </li>
+  </ul>
+
+</div>
   </div>
 </div>
 <!--last child-->
