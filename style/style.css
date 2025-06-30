@@ -18,3 +18,11 @@
     width:150px;
     
 }
+.admin_image{
+width:100px;
+object-fit: contain;
+}
+button{
+    padding: 3px;
+    margin: 3px;
+}
