@@ -1,3 +1,8 @@
+<!--connect file--> 
+<?php
+include('includes/connect.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,6 +171,17 @@
     <li class="nav-item bg-info">
       <a href="#" class="nav-link text-center">Delivery Brands</a>
     </li>
+<?php
+$select_brands="Select * from `brands`";
+$result_brands=mysqli_query($con,$select_brands);
+//$row_data=mysqli_fetch_assoc($result_brand);
+//echo $row_data['brands_title'];
+//echo $row_data['brands_title'];
+while($row_data=mysqli_fetch_assoc($result_brand));
+$brands_title= $row_data['brands_title'];
+$brand_id=$row_data['brand_id'];
+echo $brands_title;
+?>
 
      <li class="nav-item">
       <a href="#" class="nav-link text-center"> Brand1</a>
