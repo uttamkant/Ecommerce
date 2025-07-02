@@ -1,9 +1,9 @@
 <?php
 
-$con=mysqli_connect('localhost','root','','mystore');
+$conn=mysqli_connect('localhost','root','','retailstore');
 if(!$conn){
-    die("Connection failed:"
-    mysqli_connevtion_error());
+    die("Connection failed:");
+    mysqli_connection_error();
 }
 
 ?>

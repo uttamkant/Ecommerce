@@ -1,6 +1,6 @@
 <!--connect file--> 
 <?php
-include('includes/connect.php');
+include './Admin_area/includes/connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +11,11 @@ include('includes/connect.php');
     <title>Ecommerce website using PHP and MY SQL.</title>
     <!--boortstrap CSS link-->
     <link rel="stylesheet" href="style/bootstrap.min.css">
-    <link rel="stylesheet" href="style/all.min.css">
+    <!--<link rel="stylesheet" href="style/all.min.css">-->
     <!--font awesome link-->
-       <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+  font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     
@@ -172,33 +174,21 @@ include('includes/connect.php');
       <a href="#" class="nav-link text-center">Delivery Brands</a>
     </li>
 <?php
+
 $select_brands="Select * from `brands`";
-$result_brands=mysqli_query($con,$select_brands);
+$result_brands=mysqli_query($conn,$select_brands);
 //$row_data=mysqli_fetch_assoc($result_brand);
-//echo $row_data['brands_title'];
-//echo $row_data['brands_title'];
-while($row_data=mysqli_fetch_assoc($result_brand));
-$brands_title= $row_data['brands_title'];
+//echo $row_data['brand_title'];
+//echo $row_data['brand_title'];
+while($row_data=mysqli_fetch_assoc($result_brands)){
+$brand_title= $row_data['brand_title'];
 $brand_id=$row_data['brand_id'];
-echo $brands_title;
+echo "<li class='nav-item'>
+<a href='#' class='nav-link text-light'>brand_title</a>
+</li>";
+}
 ?>
 
-     <li class="nav-item">
-      <a href="#" class="nav-link text-center"> Brand1</a>
-    </li>
-
-     <li class="nav-item">
-      <a href="#" class="nav-link text-center">Brand2</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-center">Brand3</a>
-    </li>
-<li class="nav-item">
-      <a href="#" class="nav-link text-center">Brand4</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-center">Brand5</a>
-    </li>
   </ul>
 
 </div>
@@ -237,7 +227,7 @@ echo $brands_title;
     <p> All rights reserved @- Designed by uttam-2025</p>
     </div>
 </div>
-<!--bootstrap js linl-->
+<!--bootstrap js link-->
  <script src="js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>

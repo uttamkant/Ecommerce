@@ -1,5 +1,5 @@
 <?php
-include('../includes/connect.php');
+include('./includes/connect.php');
 if(isset($_POST['insert_cat'])){
     $category_title=$_POST['cat_title'];
 
@@ -17,7 +17,8 @@ if(isset($_POST['insert_cat'])){
     if($result){
         echo "<script>alert('This categroy is present inside the database')</script>";
     }
-    }}
+    }
+}
 ?>
 <h2 class="text-center">Insert categories</h2>
 <form action="" method="post" class="mb-2">
