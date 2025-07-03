@@ -1,3 +1,24 @@
+<?php
+include('./includes/connect.php');
+if(isset($_Post['insert_product'])){
+
+     $product_title=$_POST['product_title'];
+      $product_title=$_POST['product_description'];
+       $product_keywords=$_POST['product_keywords'];
+        $product_categories=$_POST['product_categories'];
+         $product_Brands=$_POST['product_Brands'];
+          $product_Price=$_POST['product_Price'];
+
+// accessing image
+      $product_image1=$_POST['product_image1'];
+      $product_image2=$_POST['product_image2'];
+      $product_image3=$_POST['product_image3'];
+          
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,13 +68,18 @@
             </div>
             <!--categories--> 
             <div class="form-outline mb-4 w-50 m-auto">
-               
-               <select name="product_categories" id=""  class="form-select">
+                <select name="product_categories" id=""  class="form-select">
                 <option value="">Select a Category</option>
-                 <option value="">Category 1</option>
-                  <option value="">Category 2</option>
-                   <option value="">Category 3</option>
-                    <option value="">Category 4</option>
+                 <?php
+                 $select_query="select * from `categories`";
+                 $result_query=mysqli_query($conn,$select_query);
+                 while($row=mysqli_fetch_assoc($result_query)){
+                    $category_title=$row['category_title'];
+                    $category_id=$row['category_id'];
+                    echo "<option value='$category_id'>$category_title</option>";
+                 }
+?>
+                
                     
                </select>
             </div>
@@ -63,6 +89,16 @@
                
                <select name="product_categories" id=""  class="form-select">
                 <option value="">Select a Brands</option>
+                <?php
+                 $select_query="select * from `brands`";
+                 $result_query=mysqli_query($conn,$select_query);
+                 while($row=mysqli_fetch_assoc($result_query)){
+                    $brands_title=$row['brands_title'];
+                    $brands_id=$row['brands_id'];
+                    echo "<option value='$brands_id'>$brands_title</option>";
+                 }
+?>
+            
                  <option value=""> Brand 1</option>
                   <option value="">Brand 2</option>
                    <option value="">Brand 3</option>
