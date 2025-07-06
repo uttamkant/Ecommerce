@@ -58,11 +58,9 @@ include('functions/common_function.php');
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex" action="search_product.php" method="get">
-        <input class="form-control me-2" type="search"
-         placeholder="Search" aria-label="Search" name="search_data">
-        <input type="sumit" value="Search" class="btn
-         btn-outline-light" name="search_data_product">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-light" type="submit">Search</button>
       </form>
     </div>
   </div>
@@ -96,7 +94,7 @@ include('functions/common_function.php');
 
        <?php
        //calling function
-          search_products();
+       getproducts();
        get_unique_categories();
         get_uniqe_brand();
 ?>
@@ -155,8 +153,9 @@ getcategories();
   </div>
 </div>
 <!--last child-->
-<!--include footer-->
-<?php include("./includes/footer.php")
+<div class="bg-info p-3 text-center">
+    <p> All rights reserved @- Designed by uttam-2025</p>
+    </div>
 </div>
 <!--bootstrap js link-->
  <script src="js/bootstrap.bundle.min.js"></script> 
