@@ -1,7 +1,7 @@
 <!--connect file--> 
 <?php
 include './Admin_area/includes/connect.php';
-include('functions/common_function.php');
+include('./Admin_area/functions/common_function.php');
 ?>
 
 <!DOCTYPE html>
@@ -99,6 +99,8 @@ include('functions/common_function.php');
           search_products();
        get_unique_categories();
         get_uniqe_brand();
+      //  $ip = getIPAddress();
+//echo 'User Real IP Address - ' .$ip;
 ?>
 <!--row end--> 
 </div>
@@ -156,7 +158,8 @@ getcategories();
 </div>
 <!--last child-->
 <!--include footer-->
-<?php include("./includes/footer.php")
+<?php include("./includes/footer.php");?>
+
 </div>
 <!--bootstrap js link-->
  <script src="js/bootstrap.bundle.min.js"></script> 
