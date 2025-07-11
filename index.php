@@ -1,7 +1,7 @@
 <!--connect file--> 
 <?php
-include './Admin_area/includes/connect.php';
-include('./Admin_area/functions/common_function.php');
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +98,7 @@ include('./Admin_area/functions/common_function.php');
        //calling function
           search_products();
        get_unique_categories();
-        get_uniqe_brand();
+        get_unique_brands();
       //  $ip = getIPAddress();
 //echo 'User Real IP Address - ' .$ip;
 ?>
@@ -160,7 +160,7 @@ get_unique_brands();
 </div>
 <!--last child-->
 <!--include footer-->
-<?php include("./includes/footer.php");?>
+<?php include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/footer.php");?>
 
 </div>
 <!--bootstrap js link-->

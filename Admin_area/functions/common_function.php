@@ -1,8 +1,76 @@
 <?php
 
 // including connect file
-include './../includes/connect.php';
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 
+// getting unique categories
+function  get_unique_categories(){
+     global $conn;
+    $category_query="SELECT * FROM `categories`";
+    $result_query=mysqli_query($conn,$category_query);
+     while($row=mysqli_fetch_assoc($result_query)){
+        $category_id=$row['category_id'];
+        $category_title=$row['category_title']; 
+         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+   
+               <h5 class='card-title'>$category_title</h5>
+            
+            </div>";
+     }
+
+ }
+    
+   
+
+ function     get_unique_brands(){
+    global $conn;
+    $brand_query="SELECT * FROM `brands`";
+    $result_query=mysqli_query($conn,$brand_query);
+     while($row=mysqli_fetch_assoc($result_query)){
+        $brand_id=$row['brand_id'];
+        $brand_title=$row['brand_title']; 
+         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+   
+               <h5 class='card-title'>$brand_title</h5>
+            
+            </div>";
+     }
+
+ }
+
+ function getbrands() {
+  global $conn;
+    $brand_query="SELECT * FROM `brands`";
+    $result_query=mysqli_query($conn,$brand_query);
+     while($row=mysqli_fetch_assoc($result_query)){
+        $brand_id=$row['brand_id'];
+        $brand_title=$row['brand_title']; 
+         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+   
+               <h5 class='card-title'>$brand_title</h5>
+            
+            </div>";
+     }
+
+ }
+ function getcategories(){
+     global $conn;
+    $category_query="SELECT * FROM `categories`";
+    $result_query=mysqli_query($conn,$category_query);
+     while($row=mysqli_fetch_assoc($result_query)){
+        $category_id=$row['category_id'];
+        $category_title=$row['category_title']; 
+         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+   
+               <h5 class='card-title'>$category_title</h5>
+            
+            </div>";
+     }
+
+ }
+
+ 
+ 
 // getting  products
 function get_products(){
     global $conn;
@@ -86,8 +154,9 @@ function get_uniqe_category(){
 
     //condition to check isse or not
     if(isset($_GET['category'])){
-        $category_id=$_GET['category'];
-        $result_query="Select * from `products` where category_id=$category_id";
+         if(isset($_GET['brand'])){
+        
+        $result_query="Select * from `products` order by rand() LIMIT 0,9";
         $result_query=mysqli_query($conn,$select_query);
         $num_of_rows=mysqli_num_rows($result_query);
         if($num_of_row==00){
@@ -96,8 +165,7 @@ function get_uniqe_category(){
         }
     }
 
-    // $row=mysqli_fetch_assoc($result_query);
-    // echpo $row['product_title'];
+   
     while($row=mysqli_fetch_assoc($result_query)){
         $product_id=$row['product_id'];
         $product_title=$row['product_title'];
@@ -122,6 +190,8 @@ function get_uniqe_category(){
     }
     
 }  
+}
+
 
 
 //getting all products
@@ -185,7 +255,7 @@ if(isset($_GET['brands'])){
     $result_query=mysqli_query($conn,$select_query);
     $num_of_rows=mysqli_rum_rows($result_query);
     if($num_of_rows==0){
-        echo "<h2 class='text-center text-danger'>No brand available for servies</h2>";
+        echo "<h2 class='text-center text-danger'>This brand is not  available for servies</h2>";
     }
     // $row=mysqli_fetch_assoc($result_query);
     // echpo $row['product_title'];
@@ -273,7 +343,8 @@ function view_details(){
     // condition to check isset or not
     if(isset($_GET['product_id'])){
         if(!isset($_GET['category'])){
-        $brand_id_query="Select *from `products` order by rand() LIMIT 0,9";
+             if(!isset($_GET['brand'])){
+             $brand_id_query="Select *from `products` where product_id=$product_id";
         $result_query=mysqli_query($conn,$select_query);
         while($row=mysqli_fetch_assoc($result_query)){
             $product_id=$row['product_id'];
@@ -301,7 +372,7 @@ function view_details(){
         }   
     }
  }
-
+}
     
 
 
@@ -332,5 +403,12 @@ $ip = $_SERVER['HTTP_X_FORWARED_FOR'];
 function cart(){
 
 }*/
+
+// cart function
+function cart(){
+    if(isset($_GET['add_to_cart'])){
+        global $conn;
+    }
+}
 ?>
 
