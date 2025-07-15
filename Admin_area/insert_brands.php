@@ -1,23 +1,26 @@
 <?php
-include('./includes/connect.php');
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
+
 if(isset($_POST['insert_brands'])){
-    $brand_title=$_POST['brand_title'];
+    $brands_title=$_POST['brand_title'];
 
 
     //select data from database
     $select_query="Select * from `brands` where   brand_title='$brands_title'";
-    $result_select=mysqli_query($conn,$insert_query);
-    $number=mysqli_num_row($result_select);
-    if(number>0){
+    $result_select=mysqli_query($conn,$select_query);
+    $number=mysqli_num_rows($result_select);
+    if($number>0){
          echo "<script>alert('Category has been inserted successfully')</script>";
     }else{
     
-    $insert_query="insert into `brands` (brands_title ) values ('$brands_title')";
+    $insert_query="insert into `brands` (brand_title ) values ('$brands_title')";
     $result=mysqli_query($conn,$insert_query);
     if($result){
         echo "<script>alert('Brands is present inside the database')</script>";
     }
     }}
+
 ?>
 
 <h2 class="text-center">Insert Brands</h2>

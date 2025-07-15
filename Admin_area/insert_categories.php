@@ -6,16 +6,16 @@ if(isset($_POST['insert_cat'])){
 
     //select data from database
     $select_query="Select * from `Categories` where   category_title='$category_title'";
-    $result_select=mysqli_query($conn,$insert_query);
-    $number=mysqli_num_row($result_select);
-    if(number>0){
-         echo "<script>alert('Category has been inserted successfully')</script>";
+    $result_select=mysqli_query($conn,$select_query);
+    $number=mysqli_num_rows($result_select);
+    if($number>0){
+         echo "<script>alert('Category already exists')</script>";
     }else{
     
-    $insert_query="insert into table `categories` (category_title ) values ('$category_title')";
+    $insert_query="insert into `categories` (category_title ) values ('$category_title')";
     $result=mysqli_query($conn,$insert_query);
     if($result){
-        echo "<script>alert('This categroy is present inside the database')</script>";
+        echo "<script>alert('This categroy have been inserted sessfully')</script>";
     }
     }
 }
@@ -30,7 +30,8 @@ if(isset($_POST['insert_cat'])){
     </div>
     <div class="input-group w-10 mb-2 m-auto">
        
-        <input type="submit" class="bg-info border-0 p-2 my-3"  name="insert_cat" value="Insert Categories">
+        <input type="submit" class="bg-info border-0 p-2 my-3" 
+         name="insert_cat" value="Insert Categories">
        
         
     </div>

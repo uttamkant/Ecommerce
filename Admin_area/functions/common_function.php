@@ -115,6 +115,28 @@ if($num_of_row==0){
     }
 
 
+function insert_brand(){
+if(isset($_POST['insert_brands'])){
+    $brands_title=$_POST['brand_title'];
+
+
+    //select data from database
+    $select_query="Select * from `brands` where   brand_title='$brands_title'";
+    $result_select=mysqli_query($conn,$select_query);
+    $number=mysqli_num_rows($result_select);
+    if($number>0){
+         echo "<script>alert('Category has been inserted successfully')</script>";
+    }else{
+    
+    $insert_query="insert into `brands` (brand_title ) values ('$brands_title')";
+    $result=mysqli_query($conn,$insert_query);
+    if($result){
+        echo "<script>alert('Brands is present inside the database')</script>";
+    }
+    }}
+
+}
+
 // displaying brands in sidenav
 function getbrands(){
      global $conn;
