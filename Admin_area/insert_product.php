@@ -1,20 +1,51 @@
 <?php
-include('./includes/connect.php');
-if(isset($_Post['insert_product'])){
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
+include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
+
+if(isset($_POST['insert_product'])){
 
      $product_title=$_POST['product_title'];
-      $product_title=$_POST['product_description'];
+      $product_description=$_POST['product_description'];
        $product_keywords=$_POST['product_keywords'];
-        $product_categories=$_POST['product_categories'];
+        $product_category=$_POST['product_category'];
          $product_Brands=$_POST['product_Brands'];
           $product_Price=$_POST['product_Price'];
+          $product_status='true';
 
 // accessing image
-      $product_image1=$_POST['product_image1'];
-      $product_image2=$_POST['product_image2'];
-      $product_image3=$_POST['product_image3'];
+      $product_image1=$_FILES['product_image1']['name'];
+      $product_image2=$_FILES['product_image2']['name'];
+      $product_image3=$_FILES['product_image3']['name'];
           
+// accessing image tmp name
+    $tmp_image1=$_FILES['product_image1']['tmp_name'];
+     $tmp_image2=$_FILES['product_image2']['tmp_name'];
+   $tmp_image3=$_FILES['product_image3']['tmp_name'];
+          
+      // checking empty condition
+      if($product_title=='' or  $product_description=='' or   
+       $product_keywords=='' or  $product_categories=='' or $product_Brands==''
+        or $product_Price==''or  $product_image1=='' or  $product_image2==''
+        or $product_image3==''){
+        echo "<script>alert('Please fill all the availabel fields')</script>";
+        exit();
+        }else{
+        move_uploaded_file($tmp_image1,"./product_images/ $product_image1");
+         move_uploaded_file($tmp_image2,"./product_images/$product_image2");
+         move_uploaded_file($tmp_image3,"./product_images/$product_image3");
 
+         //insert_query
+         $insert_products="insert into `product` (product_title,product_description,product_keywords,
+         category_id,brands_id,product_image1,product_image2,product_image3,Product_Price,
+            date ,status) values('$product_title','$product_description','  $product_keywords','$product_categories',
+            '$product_Brands','$product_image1','$product_image2','$product_image3','$Product_Price',
+            NOW(),'$product_status')";
+            $result_query=mysqli_query($conn,$insert_product);
+            if($result_query){
+                echo "<script>alert('Succeddfully inserted the products')</script>";
+            }
+        }
+    
 }
 ?>
 
@@ -53,7 +84,7 @@ if(isset($_Post['insert_product'])){
             <!--description-->  
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="description" class="form-label">Product description</label>
-                <input type="text" name="description" 
+                <input type="text" name="product_description" 
                 id="description" class="form-control" 
                 placeholder="Enter product description" autocomplete="off"
                 required="required">
@@ -61,14 +92,14 @@ if(isset($_Post['insert_product'])){
             <!--keywords-->  
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for=" Product_keywords" class="form-label">Product keywords</label>
-                <input type="text" name="keywords" 
+                <input type="text" name="product_keywords" 
                 id="description" class="form-control" 
                 placeholder="Enter product keywords" autocomplete="off"
                 required="required">
             </div>
             <!--categories--> 
             <div class="form-outline mb-4 w-50 m-auto">
-                <select name="product_categories" id=""  class="form-select">
+                <select name="product_category" id=""  class="form-select">
                 <option value="">Select a Category</option>
                  <?php
                  $select_query="select * from `categories`";
