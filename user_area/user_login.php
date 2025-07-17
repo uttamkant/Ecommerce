@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +15,7 @@
     <!--<link rel="stylesheet" href="style/all.min.css">-->
     <body>
         <div class="container-fluid my-3">
-            <h2 class="text-center">New Uer Registration</h2>
+            <h2 class="text-center">New User login</h2>
             <div class="row d-flex  align-items-center justify-content-center">
                 <div class="lg-12 col-xl-6">
                     <form action="" method="post" enctype="multipart/form-data">

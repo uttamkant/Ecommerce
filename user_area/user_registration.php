@@ -2,6 +2,53 @@
 <?php
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
+
+if(isset($_POST['user_register'])){
+     $user_username=$_POST['user_username'];
+     $user_email=$_POST['user_email'];
+
+   
+    $user_image=$_FILES['user_image']['name'];
+    $tmp_image=$_FILES['user_image']['tmp_name'];
+   // move_uploaded_file($tmp_image,"./user_images/$user_image");
+     $user_password=$_POST['user_password'];
+     $conf_user_password=$_POST['conf_user_password'];
+     $user_address=$_POST['user_address'];
+     $user_contact=$_POST['user_contact'];
+     
+     // checking empty condition
+    if(   $user_username=='' or    $user_email=='' or   
+        $user_image=='' or   $user_password=='' or  $conf_user_password==''
+        or $user_address==''or   $user_contact==''){
+         echo "<script>alert('Please fill all the available fields')</script>";
+        exit();
+        }else{
+          
+            if($user_password===$conf_user_password)
+            {
+                move_uploaded_file($tmp_image,"./user_images/$user_image");
+                 $hashed_user_password=password_hash($user_password,PASSWORD_BCRYPT);   
+                $insert_user="insert into `user_table` (username,user_email,user_password,
+       user_image,  user_ip,user_address,user_mobile) values('$user_username','$user_email','$hashed_user_password','$user_image',
+       'NULL',
+            '$user_address','$user_contact')";
+            $result_query=mysqli_query($conn,$insert_user);
+            if($result_query){
+                echo "<script>alert('Successfully register the user')</script>";
+            }else{
+                echo "<script>alert('user have been not register')</script>";
+        exit();
+            }
+
+            }else{
+                   echo "<script>alert('your password is not matching')</script>";
+        exit();
+            }
+
+        }
+     
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +64,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
     <!--<link rel="stylesheet" href="style/all.min.css">-->
     <body>
         <div class="container-fluid my-3">
-            <h2 class="text-center">New Uer Registration</h2>
+            <h2 class="text-center">New User Registration</h2>
             <div class="row d-flex  align-items-center justify-content-center">
                 <div class="lg-12 col-xl-6">
                     <form action="" method="post" enctype="multipart/form-data">
