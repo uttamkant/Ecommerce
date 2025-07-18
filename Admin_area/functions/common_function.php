@@ -443,14 +443,15 @@ function cart(){
         $num_of_rows=mysqli_num_rows($result_query);
         if($num_of_row>0){
             echo "<h2 class='text-center text-denger'>No stock for this category</h2>";
-            echo"<script>('This item is already present inside the cart')
-            </script>"
-            echoo"<script>window.open('index.php','_self')</script>";
+            echo "<script>('This item is already present inside the cart')
+            </script>";
+            echo "<script>window.open('index.php','self')</script>";
+
             }else{
                 $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values ($get_product_id,
                 '$get_ip_address','0')";
                 $result_query=mysqli_query($conn,$insert_query);
-                 echoo"<script>window.open('index.php','_self')</script>";
+                 echo "<script>window.open('index.php','_self')</script>";
             }    
     }
 }

@@ -70,7 +70,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
 
 <!--calling cart function-->
 <?php
-cat();
+cart();
 ?>
 <!--second child--> 
 <nav class="navbar-navbar-expannd-lg navbar-dark bg-secondary">
