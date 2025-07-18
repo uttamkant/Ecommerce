@@ -68,7 +68,10 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
   </div>
 </nav>
 
-
+<!--calling cart function-->
+<?php
+cat();
+?>
 <!--second child--> 
 <nav class="navbar-navbar-expannd-lg navbar-dark bg-secondary">
   <ul class="navbar-nav me--auto">

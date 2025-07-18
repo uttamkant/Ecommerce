@@ -91,8 +91,9 @@ function get_products(){
                <div class='card-body'>
                <h5 class='card-title'>$product_title</h5>
               <p class='card-text'>$product_description</p>
-              <a href='product_details.php?product_id' class='btn btn-info'>Add to cart</a>
-           <a href='#' class='btn btn-secondary'>View more</a>
+              <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
+           <a href='product_details.php?$product_id' class='btn btn-secondary'>View more</a>
            </div>
 
         </div>
@@ -203,7 +204,8 @@ function get_uniqe_category(){
                     <div class='card-body'>
                         <h5 class='card-title'>$product_title</h5>
                         <p class='card-text'>$product_description</p>
-                        <a href='#' ='class btn btn-info'> Add to cart</a>
+                         <a href='idex.php?add_to_cart=$product_id' 
+                             class='btn btn-info'>Add to cart</a>
                         <a href='product_details.php?product_id=$product_id'
                             class='btn btn-seconday'>View more</a>
                     </div>
@@ -252,7 +254,8 @@ function get_all_products(){
                <div class='card-body'>
                <h5 class='card-title'>$product_title</h5>
                <p class='card-text'>$product_description</p>
-               <a href='#' ='class btn btn-ifo'> Add to cart</a>
+                 <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
                <a href='#' class='btn btn-seconday'>View more</a>
                </div>
                </div>
@@ -296,7 +299,8 @@ if(isset($_GET['brands'])){
                <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>$product_description</p>
-                    <a href='#' class='btn btn-info'> Add to cart</a>
+                      <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
                     <a href='#' class='btn btn-seconday'>View more</a>
                 </div>
             </div>
@@ -347,7 +351,8 @@ if($num_of_row==0){
                <div class='card-body'>
                <h5 class='card-title'>$product_title</h5>
                <p class='card-text'>$product_description</p>
-               <a href='' class='btn btn-info'> Add to cart</a>
+                <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
                <a href='#' class='btn btn-seconday'>View more</a>
                </div>
                </div>
@@ -383,7 +388,8 @@ function view_details(){
                             <div class='card-body'>
                                 <h5 class='card-title'>$product_title</h5>
                                 <p class='card-text'>$product_description</p>
-                                <a href='#' class='btn btn-info'>Add to cart</a>
+                                 <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
                                 <a href='#' class='btn btn-secondary'>View more</a>
                             </div>
 
@@ -430,6 +436,22 @@ function cart(){
 function cart(){
     if(isset($_GET['add_to_cart'])){
         global $conn;
+        $get_product_id=$_GET['add_to_cart'];
+        $select_query="Select * from `cart_details` where ip_address='$get_ip_address'";
+        $result_query=mysqli_query($con,$select_query);    
+        $result_query=mysqli_query($conn,$select_query);
+        $num_of_rows=mysqli_num_rows($result_query);
+        if($num_of_row>0){
+            echo "<h2 class='text-center text-denger'>No stock for this category</h2>";
+            echo"<script>('This item is already present inside the cart')
+            </script>"
+            echoo"<script>window.open('index.php','_self')</script>";
+            }else{
+                $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values ($get_product_id,
+                '$get_ip_address','0')";
+                $result_query=mysqli_query($conn,$insert_query);
+                 echoo"<script>window.open('index.php','_self')</script>";
+            }    
     }
 }
 ?>
