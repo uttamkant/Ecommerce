@@ -1,5 +1,6 @@
 <!--connect file--> 
 <?php
+session_start();
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
 ?>
@@ -76,11 +77,36 @@ cart();
 <nav class="navbar-navbar-expannd-lg navbar-dark bg-secondary">
   <ul class="navbar-nav me--auto">
     <ul class="nav-item">
-     <a class="nav-link" href="#">Wellcome Guest</a>
+    <?php
+    if (isset($_SESSION['username'])) {
+    // If set, display the username
+    echo '<a class="nav-link" href="#">Welcome ' . htmlspecialchars($_SESSION['username']) . '</a>';
+} else {
+    // If not set, display the default message
+    echo '<a class="nav-link" href="#">Welcome Guest</a>';
+}
+    ?>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="#">Login</a>
+  <?php
+  if (isset($_SESSION['username'])) {
+    // If set, display the Logout link
+    echo '<a class="nav-link" href="logout.php">Logout</a>';
+} else {
+    // If not set, display the Login link
+    echo '<a class="nav-link" href="login.php">Login</a>';
+}
+  ?>
+  <?php
+  if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
 
+  ?>
     </ul>
   </ul>
 </nav>
