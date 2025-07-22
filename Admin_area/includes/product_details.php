@@ -53,7 +53,7 @@ include('functions/common_function.php');
         </li>
         <li class="nav-item">
              <li class="nav-item">
-          <a class="nav-link" href="#">total price :100/-</a>
+     <a class="nav-link" href="#">total price : <?php total_cart_price();?>/-</a>
         </li>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
