@@ -436,25 +436,52 @@ function cart(){
 function cart(){
     if(isset($_GET['add_to_cart'])){
         global $conn;
+        $get_user_id= getUSERId();
         $get_product_id=$_GET['add_to_cart'];
-        $select_query="Select * from `cart_details` where ip_address='$get_ip_address'";
+
+        $select_query="Select * from `cart_details` where user_id=
+        '$get_user_id'";
         $result_query=mysqli_query($con,$select_query);    
-        $result_query=mysqli_query($conn,$select_query);
         $num_of_rows=mysqli_num_rows($result_query);
         if($num_of_row>0){
-            echo "<h2 class='text-center text-denger'>No stock for this category</h2>";
-            echo "<script>('This item is already present inside the cart')
+            
+            echo "<script>alert('This item is already present inside the cart')
             </script>";
             echo "<script>window.open('index.php','self')</script>";
 
             }else{
-                $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values ($get_product_id,
-                '$get_ip_address','0')";
+                $insert_query="insert into `cart_details` (product_id,user_id,quantity) values ($get_user_id,
+                '$user_id','0')";
                 $result_query=mysqli_query($conn,$insert_query);
+                 echo "<script>alert('Item is added to cart')</script>";
                  echo "<script>window.open('index.php','_self')</script>";
             }    
     }
 }
+
+
+// funtion to get cart item numbers
+function cart_item(){
+    if(isset($_GET['add_to_cart'])){
+        global $conn;
+        $get_user_id= getUSERId();
+        $select_query="Select * from `cart_details` where user_id='$get_user_id'";
+        $result_query=mysqli_query($con,$select_query);    
+        $count_cart_items=mysqli_num_rows($result_query);
+        if($num_of_row>0){
+            }else{
+                global $conn;
+        $get_user_id= getUSERId();
+        $select_query="Select * from `cart_details` where user_id='$get_user_id'";
+        $result_query=mysqli_query($con,$select_query);    
+        $count_cart_items=mysqli_num_rows($result_query);
+            }   
+            echo $count_cart_items; 
+    }
+}
+
+
+
 
 // total price funtion
 function total_cart_price(){
