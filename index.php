@@ -91,10 +91,10 @@ cart();
   <?php
   if (isset($_SESSION['username'])) {
     // If set, display the Logout link
-    echo '<a class="nav-link" href="logout.php">Logout</a>';
+    echo '<a class="nav-link" href="./user_area/user_logout.php">Logout</a>';
 } else {
     // If not set, display the Login link
-    echo '<a class="nav-link" href="login.php">Login</a>';
+    echo '<a class="nav-link" href="./user_area/user_login.php">Login</a>';
 }
   ?>
   <?php

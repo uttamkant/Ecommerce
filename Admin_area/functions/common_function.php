@@ -458,7 +458,8 @@ function cart(){
 
 // total price funtion
 function total_cart_price(){
-    global $conn;
+$total_price=500;
+    /*global $conn;
     $get_ip_add = getIPAddress();
     $total=0;
     $cart_query="Select * from `cart_details` where 
@@ -474,7 +475,7 @@ function total_cart_price(){
         $product_value=array_sum($product_price); //[500]
         $total_price+=$product_values;//[500]
             }
-    }
+    }*/
     echo $total_price;
 }
 ?>
