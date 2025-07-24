@@ -50,8 +50,9 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
           <a class="nav-link" href="#">contact</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup><?php 
-      cart_item();</sup></a>
+          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping">
+       </i><sup><?php 
+      cart_item();?></sup></a>
         </li>
         <li class="nav-item">
              <li class="nav-item">
@@ -119,73 +120,47 @@ cart();
 </div>
 <!--fourth child--> 
 <div class="row px-3">
-  <div class="col mod-10">
+    <div class="col md-10">
     <!--products--> 
-    <div class="row">
+      <div class="row">
 <!--fetching product-->
 
-       <?php
-       //calling function
-          search_products();
-       get_unique_categories();
-        get_unique_brands();
-      //  $ip = getIPAddress();
-//echo 'User Real IP Address - ' .$ip;
-?>
-<!--row end--> 
-</div>
-<!--colom end--> 
- </div>
+        <?php
+            echo "product section";
+            get_all_product();
+          ?>
+        <!--row end--> 
+      </div>
+      <!--column end--> 
+      </div>
 
    
-<div class="col-md-2 bg-secondary p-0">
-  <ul class="navbar-nav me-auto text-center">
-    <li class="nav-item bg-info">
-      <a href="#" class="nav-link text-center">Delivery Brands</a>
-    </li>
-<?php
+      <div class="col-md-2 bg-secondary p-0">
+        <ul class="navbar-nav me-auto text-center">
+          <li class="nav-item bg-info">
+            <a href="#" class="nav-link text-center">Delivery Brands</a>
+          </li>
+         
+            <?php
 
+              getbrands();
+              ?>
 
-?>
-
-  </ul>
-
-</div>
-<div class="col-md-2 bg-secondary p-0">
-  <!--brands to be displayed-->
-  <ul class="navbar-nav me-auto text-center">
-    <?php
-getbrands();
-    ?>
-</ul>
-
-<!--categories to be displayed--> 
-<a href="#" class="nav-link text-center bg-info">Categories</a>
-    </li>
-
-     <li class="nav-item">
-      <a href="#" class="nav-link text-center"> Categories1</a>
-    </li>
-
-     <li class="nav-item">
-      <a href="#" class="nav-link text-center">Categories2</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-center">Categories3</a>
-    </li>
-<li class="nav-item">
-      <a href="#" class="nav-link text-center">Categories4</a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-center">Categories5</a>
-    </li>
-  </ul>
-<?php
+          </ul>
+        <ul class="navbar-nav me-auto text-center">
+          <li class="nav-item bg-info">
+            <a href="#" class="nav-link text-center">Delivery Categories</a>
+          </li>
+        
+            <?php
 getcategories();
-get_unique_categories();
-get_unique_brands();
-?>
+
+              ?>
+
+          </ul>
+
 </div>
+
   </div>
 </div>
 <!--last child-->

@@ -38,38 +38,35 @@ function  get_unique_categories(){
 
  }
 
- function getbrands() {
-  global $conn;
-    $brand_query="SELECT * FROM `brands`";
-    $result_query=mysqli_query($conn,$brand_query);
-     while($row=mysqli_fetch_assoc($result_query)){
-        $brand_id=$row['brand_id'];
-        $brand_title=$row['brand_title']; 
-         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-   
-               <h5 class='card-title'>$brand_title</h5>
-            
-            </div>";
-     }
-
- }
- function getcategories(){
+ // displaying brands in sidenav
+function getbrands(){
      global $conn;
-    $category_query="SELECT * FROM `categories`";
-    $result_query=mysqli_query($conn,$category_query);
-     while($row=mysqli_fetch_assoc($result_query)){
-        $category_id=$row['category_id'];
-        $category_title=$row['category_title']; 
-         echo "<div class='col-md-4mb-2'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-   
-               <h5 class='card-title'>$category_title</h5>
-            
-            </div>";
-     }
+    $select_brands="Select * from `brands`";
+$result_brands=mysqli_query($conn,$select_brands);
+while($row_data=mysqli_fetch_assoc($result_brands)){
+$brand_id= $row_data['brand_id'];
+$brand_title=$row_data['brand_title'];
 
- }
+echo "<li class='nav-item'>
+<a href='index.php?brands=$brand_id' class='nav-link text-light'>$brand_title</a>
+</li>";
+}
+}
 
- 
+// displaying categories in sidenav
+function getcategories(){
+     global $conn;
+     $select_categories="Select * from `categories`";
+$result_categories=mysqli_query($conn,$select_categories);
+while($row_data=mysqli_fetch_assoc($result_categories)){
+$category_id= $row_data['category_id'];
+$category_title=$row_data['category_title'];
+echo "<li class='nav-item'>
+<a href='index.php?category=$category_id' class='nav-link text-light'>$category_title</a>
+</li>";
+}
+}
+
  
 // getting  products
 function get_products(){
@@ -114,7 +111,7 @@ if($num_of_row==0){
 
 }
     }
-
+}
 
 function insert_brand(){
 if(isset($_POST['insert_brands'])){
@@ -138,33 +135,53 @@ if(isset($_POST['insert_brands'])){
 
 }
 
-// displaying brands in sidenav
-function getbrands(){
-     global $conn;
-    $select_brands="Select * from `brands`";
-$result_brands=mysqli_query($conn,$select_brands);
-while($row_data=mysqli_fetch_assoc($result_brands)){
-$brand_title= $row_data['brand_id'];
-$brand_id=$row_data['brand_title'];
 
-echo "<li class='nav-item'>
-<a href='index.php?brands=$brands_id' class='nav-link text-light'>$brand_title</a>
-</li>";
-}
-}
+function get_all_product(){
+    
+    global $conn;
 
-// displaying categories in sidenav
-function getcategories(){
-     global $conn;
-     $select_categories="Select * from `categories`";
-$result_categories=mysqli_query($conn,$select_categories);
-while($row_data=mysqli_fetch_assoc($result_categories)){
-$categories_id= $row_data['categories_id'];
-$categories_title=$row_data['categories_title'];
-echo "<li class='nav-item'>
-<a href='index.php?category=$categories_id' class='nav-link text-light'>$category_title</a>
-</li>";
+
+    // condition to check isset or not 
+  /*  if(isset($_GET['category'])){
+        $category_id=$_GET['category'];
+        $result_query="Select * from `products` where category_id=$category_id";
+        $result_query=mysqli_query($conn,$select_query);
+        $num_of_rows=mysqli_num_rows($result_query);
+        if($num_of_row==0){
+            echo "<h2 class='text-center text-denger'>No stock for this category</h2>";
+
+        }*/
+
+        $select_query="select * from `product`";
+        $result_query=mysqli_query($conn,$select_query);
+        $num_of_rows=mysqli_num_rows($result_query);
+    // $row=mysqli_fetch_assoc($result_query);
+    // echpo $row['product_title'];
+    while($row=mysqli_fetch_assoc($result_query)){
+        $product_id=$row['product_id'];
+        $product_title=$row['product_title'];
+        $product_description=$row['product_description'];
+        $product_image1=$row['product_image1'];
+        $product_price=$row['product_price'];
+        $category_id=$row['category_id'];
+        $brand_id=$row['brands_id'];
+   echo "<div class='col-md-4 mb-2'>
+        <div class='card'>
+               <img src='./admin_area/product_images/$product_image1'
+               class='card-img-top' alt='$product_title'>
+               <div class='card-body'>
+               <h5 class='card-title'>$product_title</h5>
+               <p class='card-text'>$product_description</p>
+                 <a href='idex.php?add_to_cart=$product_id' 
+              class='btn btn-info'>Add to cart</a>
+               <a href='#' class='btn btn-seconday'>View more</a>
+               </div>
+               </div>
+               </div>";
+
+
 }
+    
 }
 
 
@@ -220,54 +237,8 @@ function get_uniqe_category(){
 
 //getting all products
 
-function get_all_products(){
-    
-    global $conn;
 
 
-    // condition to check isset or not 
-    if(isset($_GET['category'])){
-        $category_id=$_GET['category'];
-        $result_query="Select *from `products` where category_id=$category_id";
-        $result_query=mysqli_query($conn,$select_query);
-        $num_of_rows=mysqli_num_rows($result_query);
-        if($num_of_row==0){
-            echo "<h2 class='text-center text-denger'>No stock for this category</h2>";
-
-        }
-
-
-    // $row=mysqli_fetch_assoc($result_query);
-    // echpo $row['product_title'];
-    while($row=mysqli_fetch_assoc($result_query)){
-        $product_id=$row['product_id'];
-        $product_title=$row['product_title'];
-        $product_description=$row['product_description'];
-        $product_image1=$row['product_image1'];
-        $product_price=$row['product_price'];
-        $category_id=$row['category_id'];
-        $brand_id=$row['brands_id'];
-   echo "<div class='col-md-4 mb-2'>
-        <div class='card'>
-               <img src='./admin_area/product_images/$product_image1'
-               class='card-img-top' alt='$product_title'>
-               <div class='card-body'>
-               <h5 class='card-title'>$product_title</h5>
-               <p class='card-text'>$product_description</p>
-                 <a href='idex.php?add_to_cart=$product_id' 
-              class='btn btn-info'>Add to cart</a>
-               <a href='#' class='btn btn-seconday'>View more</a>
-               </div>
-               </div>
-               </div>";
-
-
-}
-    }
-}
-
-
-}
 
 
         // getting unique brands
@@ -470,16 +441,14 @@ function cart_item(){
         $count_cart_items=mysqli_num_rows($result_query);
         if($num_of_row>0){
             }else{
-                global $conn;
-        $get_user_id= getUSERId();
-        $select_query="Select * from `cart_details` where user_id='$get_user_id'";
-        $result_query=mysqli_query($con,$select_query);    
-        $count_cart_items=mysqli_num_rows($result_query);
-            }   
-            echo $count_cart_items; 
+       $insert_query="insert into `cart_details`
+        (product_id,user_id,quantity) values ($get_product_id,'$get_user_id',0)";
+        $result_query=mysqli_query($conn,$insert_query);
+        echo "<script>alert('Item is added to cart')</script>";
+        echo "<script>window.open('index.php','_self')<?script>";
     }
 }
-
+}
 
 
 
