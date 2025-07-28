@@ -78,7 +78,7 @@
     include('insert_categories.php');
 }
 
-    if(isset($_GET['insert_brand'])){
+    if(isset($_GET['insert_brands'])){
     include('insert_brands.php');
     }
 

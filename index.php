@@ -50,8 +50,8 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
           <a class="nav-link" href="#">contact</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping">
-       </i><sup><?php 
+          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i>
+       <sup><?php 
       cart_item();?></sup></a>
         </li>
         <li class="nav-item">
@@ -59,7 +59,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
           <a class="nav-link" href="#">total price : <?php total_cart_price();?>/-</a>
         </li>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
+        
       </ul>
       <form class="d-flex" action="search_product.php" method="get">
         <input class="form-control me-2" type="search"

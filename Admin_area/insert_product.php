@@ -2,51 +2,25 @@
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
 
-if(isset($_POST['insert_product'])){
+// Assuming you have already established a connection in $conn
 
-     $product_title=$_POST['product_title'];
-      $product_description=$_POST['product_description'];
-       $product_keywords=$_POST['product_keywords'];
-        $product_category=$_POST['product_category'];
-         $product_Brands=$_POST['product_brands'];
-          $Product_Price=$_POST['Product_Price'];
-          $product_status='true';
+// Define the SQL INSERT query
+$insert_product = "INSERT INTO products (name, price, quantity) VALUES ('Apple', 1.00, 10)";
 
-// accessing image
-      $product_image1=$_FILES['product_image1']['name'];
-      $product_image2=$_FILES['product_image2']['name'];
-      $product_image3=$_FILES['product_image3']['name'];
-          
-// accessing image tmp name
-    $tmp_image1=$_FILES['product_image1']['tmp_name'];
-     $tmp_image2=$_FILES['product_image2']['tmp_name'];
-   $tmp_image3=$_FILES['product_image3']['tmp_name'];
-          
-      // checking empty condition
-      if($product_title=='' or  $product_description=='' or   
-       $product_keywords=='' or  $product_category=='' or $product_Brands==''
-        or $Product_Price==''or  $product_image1=='' or  $product_image2==''
-        or $product_image3==''){
-        echo "<script>alert('Please fill all the availabel fields')</script>";
-        exit();
-        }else{
-        move_uploaded_file($tmp_image1,"./product_images/$product_image1");
-         move_uploaded_file($tmp_image2,"./product_images/$product_image2");
-         move_uploaded_file($tmp_image3,"./product_images/$product_image3");
+// Check if the query is not empty
+if (!empty($insert_product)) {
+    $result_query = mysqli_query($conn, $insert_product);
 
-         //insert_query
-         $insert_products="insert into `product` (product_title,product_description,product_keywords,
-         category_id,brands_id,product_image1,product_image2,product_image3,Product_Price,
-            date ,status) values('$product_title','$product_description','$product_keywords','$product_category',
-            '$product_Brands','$product_image1','$product_image2','$product_image3','$Product_Price',
-            NOW(),'$product_status')";
-            $result_query=mysqli_query($conn,$insert_products);
-            if($result_query){
-                echo "<script>alert('Succeddfully inserted the products')</script>";
-            }
-        }
-    
+    // Check for query execution errors
+    if (!$result_query) {
+        die("Query Failed: " . mysqli_error($conn));
+    } else {
+        echo "Product inserted successfully!";
+    }
+} else {
+    die("Error: The query is empty.");
 }
+
 ?>
 
 
@@ -118,14 +92,14 @@ if(isset($_POST['insert_product'])){
         <!--Brands--> 
             <div class="form-outline mb-4 w-50 m-auto">
                
-               <select name="product_brands" id=""  class="form-select">
+               <select name="product_brands" id="" class="form-select">
                 <option value="">Select a Brands</option>
                 <?php
-                 $select_query="select * from `brands`";
+                 $select_query="Select * from `brands`";
                  $result_query=mysqli_query($conn,$select_query);
                  while($row=mysqli_fetch_assoc($result_query)){
-                    $brands_title=$row['brand_title'];
-                    $brands_id=$row['brand_id'];
+                    $brands_id=$row['brands_id'];
+                    $brands_title=$row['brands_title'];
                     echo "<option value='$brands_id'>$brands_title</option>";
                  }
 ?>
