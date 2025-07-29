@@ -172,7 +172,7 @@ function get_all_product(){
                <div class='card-body'>
                <h5 class='card-title'>$product_title</h5>
                <p class='card-text'>$product_description</p>
-                 <a href='idex.php?add_to_cart=$product_id' 
+                 <a href='index.php?add_to_cart=$product_id' 
               class='btn btn-info'>Add to cart</a>
                <a href='#' class='btn btn-seconday'>View more</a>
                </div>
@@ -404,6 +404,20 @@ function cart(){
 }*/
 
 // cart function
+function getUSERId(){
+  
+   // Start the session again if not already started
+
+if (isset($_SESSION['userid'])) {
+    $userId =    $_SESSION['userid'];
+    echo "User ID: " . $userId;
+    return $userId;
+} else {
+    echo "User is not logged in.";
+    return null;
+}
+
+}
 function cart(){
     if(isset($_GET['add_to_cart'])){
         global $conn;
@@ -436,11 +450,13 @@ function cart_item(){
     if(isset($_GET['add_to_cart'])){
         global $conn;
         $get_user_id= getUSERId();
+        echo $get_user_id;
         $select_query="Select * from `cart_details` where user_id='$get_user_id'";
-        $result_query=mysqli_query($con,$select_query);    
+        $result_query=mysqli_query($conn,$select_query);    
         $count_cart_items=mysqli_num_rows($result_query);
-        if($num_of_row>0){
+        if( $count_cart_items>0){
             }else{
+             $get_product_id=   $_GET['add_to_cart'];
        $insert_query="insert into `cart_details`
         (product_id,user_id,quantity) values ($get_product_id,'$get_user_id',0)";
         $result_query=mysqli_query($conn,$insert_query);

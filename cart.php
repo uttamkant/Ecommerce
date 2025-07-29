@@ -122,6 +122,20 @@ cart();
                    <th>Operation</th>
                 </tr>
             </thead>
+            <tbody>
+              <tr>
+                <td>Apple</td>
+                <td><img src="./images/apple.jpg" alt=""></td>
+                <td><input type="text" name="" id=""></td>
+                <td>9000</td>
+                <td><input type="checkbox"></td>
+                <td>
+                  <p>update</p>
+                  <p>remove</p>
+                  
+                </td>
+              </tr>
+</tbody>
         </table>
     </div>
 </div>
