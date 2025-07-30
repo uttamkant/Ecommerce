@@ -408,12 +408,29 @@ function getUSERId(){
   
    // Start the session again if not already started
 
+
+// Check if the session is already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Start the session if not already started
+}
+
+// Check if session variables are set
+if (!empty($_SESSION)) {
+    // Print all session variables
+    echo '<pre>'; // For better formatting
+    print_r($_SESSION);
+    echo '</pre>';
+} else {
+    echo 'No session variables are set.';
+}
+
+
 if (isset($_SESSION['userid'])) {
     $userId =    $_SESSION['userid'];
     echo "User ID: " . $userId;
     return $userId;
 } else {
-    echo "User is not logged in.";
+    echo "User is not logged in from here.";
     return null;
 }
 
@@ -456,7 +473,7 @@ function cart_item(){
         $count_cart_items=mysqli_num_rows($result_query);
         if( $count_cart_items>0){
             }else{
-             $get_product_id=   $_GET['add_to_cart'];
+             $get_product_id=$_GET['add_to_cart'];
        $insert_query="insert into `cart_details`
         (product_id,user_id,quantity) values ($get_product_id,'$get_user_id',0)";
         $result_query=mysqli_query($conn,$insert_query);
@@ -471,11 +488,11 @@ function cart_item(){
 // total price funtion
 function total_cart_price(){
 $total_price=500;
-    /*global $conn;
-    $get_ip_add = getIPAddress();
+    global $conn;
+    $get_user_id = getUSERId();
     $total=0;
     $cart_query="Select * from `cart_details` where 
-    ip_address='$get_ip_add'";
+    user_id='$get_user_id'";
     $result=mysqli_query($conn,$cart_query);
     while($row=mysqli_fetch_array($result)){
         $product_id=$row['product_id'];
@@ -487,7 +504,7 @@ $total_price=500;
         $product_value=array_sum($product_price); //[500]
         $total_price+=$product_values;//[500]
             }
-    }*/
+    }
     echo $total_price;
 }
 ?>

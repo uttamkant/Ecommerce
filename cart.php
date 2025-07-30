@@ -1,6 +1,9 @@
 <!--connect file--> 
 <?php
-session_start();
+// Check if the session is already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Start the session if not already started
+}
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
 ?>
@@ -10,7 +13,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce website-Cart details<title>
+    <title>Ecommerce website Cart details</title>
     <!--boortstrap CSS link-->
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <!--<link rel="stylesheet" href="style/all.min.css">-->
@@ -18,10 +21,17 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
   font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style/style.css">
+  <style>
+    
+.cart-img{
+width: 80px;
+height: 80px;
+}
+    </style>
 </head>
 <body>
     
-
+hello
 
 <!--navbar-->
 <div class="container-fluid">
@@ -83,10 +93,10 @@ cart();
   <?php
   if (isset($_SESSION['username'])) {
     // If set, display the Logout link
-    echo '<a class="nav-link" href="logout.php">Logout</a>';
+    echo '<a class="nav-link" href="user_area/user_logout.php">Logout</a>';
 } else {
     // If not set, display the Login link
-    echo '<a class="nav-link" href="login.php">Login</a>';
+    echo '<a class="nav-link" href="user_area/user_login.php">Login</a>';
 }
   ?>
   <?php
@@ -111,7 +121,7 @@ cart();
 <!--fourth child-table--> 
 <div class="container">
     <div class="row">
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
                    <th>Product Title</th>
@@ -119,24 +129,58 @@ cart();
                    <th>Quantity</th>
                    <th>Total Price</th>
                    <th>Remove</th>
-                   <th>Operation</th>
+                   <th colspan="2">Operation</th>
                 </tr>
             </thead>
             <tbody>
+              <!--php code to display data-->
+              <?php
+ global $conn;
+    $get_user_id = getUSERId();
+    $total=0;
+    $cart_query="Select * from `cart_details` where 
+    user_id='$get_user_id'";
+    $result=mysqli_query($conn,$cart_query);
+    while($row=mysqli_fetch_array($result)){
+        $product_id=$row['product_id'];
+        $select_product="Select * from `products`
+         where product_id=' $product_id'";
+             $result_products=mysqli_query($conn,$cart_query);
+            while($row_product_price=mysqli_fetch_array($result_products)){
+        $product_price=array($row_product_price['product_sprice']); 
+        $price_table=$row_product_price['product_price'];
+        $product_title=$row_product_price['product_title'];
+        $product_title=$row_product_price['product_title'];
+        $product_value=array_sum($product_price); //[500]
+        $total_price+=$product_values;//[500]
+            }
+    }
+
+?>
               <tr>
                 <td>Apple</td>
-                <td><img src="./images/apple.jpg" alt=""></td>
+                <td><img src="./images/apple.jpg" alt="" class="cart_img"></td>
                 <td><input type="text" name="" id=""></td>
                 <td>9000</td>
                 <td><input type="checkbox"></td>
                 <td>
-                  <p>update</p>
-                  <p>remove</p>
+                  <button class="bg-info px-3 py-2
+          border-0 mx-3">Update</button><button class="bg-info px-3 py-2
+          border-0 mx-3">Removes</button>
                   
                 </td>
               </tr>
-</tbody>
+          </tbody>
         </table>
+        <!--subtotal--> 
+        <div class="d-flex mb-35">
+          <h4 class="px-4">subtotal:<strong class="text-info">5000/-
+          </strong></h4>
+          <a href="index.php"><<button class="bg-info px-3 py-2
+          border-0 mx-3">Contiune Shopping</button>/a>
+          <a href="#"><<button class="bg-secondary p-3 py-2
+          border-0n text-light">Checkout</button>/a>
+        </div>
     </div>
 </div>
 
