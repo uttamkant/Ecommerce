@@ -26,6 +26,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
 .cart-img{
 width: 80px;
 height: 80px;
+boject-fit:contain;
 }
     </style>
 </head>
@@ -118,9 +119,10 @@ cart();
   <p class="text-center">Communications is at the heart of e-commerce and community</p>
 </div>
 
-<!--fourth child-table--> 
+<!--fourth child-table-->
 <div class="container">
     <div class="row">
+      <form action="" method="post">
         <table class="table table-bordered text-center">
             <thead>
                 <tr>
@@ -145,37 +147,51 @@ cart();
         $product_id=$row['product_id'];
         $select_product="Select * from `products`
          where product_id=' $product_id'";
-             $result_products=mysqli_query($conn,$cart_query);
+             $result_products=mysqli_query($conn,$select_products);
             while($row_product_price=mysqli_fetch_array($result_products)){
         $product_price=array($row_product_price['product_sprice']); 
         $price_table=$row_product_price['product_price'];
         $product_title=$row_product_price['product_title'];
-        $product_title=$row_product_price['product_title'];
+        $product_image1=$row_product_price['product_image1'];
         $product_value=array_sum($product_price); //[500]
         $total_price+=$product_values;//[500]
-            }
-    }
-
+          
 ?>
               <tr>
-                <td>Apple</td>
-                <td><img src="./images/apple.jpg" alt="" class="cart_img"></td>
-                <td><input type="text" name="" id=""></td>
-                <td>9000</td>
+                <td><?php echo $product_title?></td>
+                <td><img src="./images/<?php echo $product_image1?>"
+                 alt="" class="cart_img"></td>
+                <td><input type="text" name="" id="qty" class="form-input 
+                w-50"></td>
+                <?php   
+                 $get_user_id = getUSERId();
+                 if(isset($POST['update_cart'])){
+                  $qunatities=$_POST['qty'];
+                  $update_cart="update `cart-details` set quantity=$qunatities where 
+                  _id=user=   $get_user_id";
+                  $result_products_quantity=mysqli_query($conn,$update_cart);
+                  $total_price=$total_price*$qunatities;
+                 }
+                ?>
+                <td><?php echo $price_table?>/-</td>
                 <td><input type="checkbox"></td>
                 <td>
-                  <button class="bg-info px-3 py-2
-          border-0 mx-3">Update</button><button class="bg-info px-3 py-2
-          border-0 mx-3">Removes</button>
+                  <!--<button class="bg-info px-3 py-2
+                   border-0 mx-3">Update</button>-->
+                   <input type="sumbit" value="update Cart"
+                   class="bg-info px-3 py-2 border-0 mx-3" name="update_cart">
+                   <button class="bg-info px-3 py-2
+                    border-0 mx-3">Removes</button>
                   
                 </td>
               </tr>
+              <?php }}?>
+         
           </tbody>
         </table>
         <!--subtotal--> 
         <div class="d-flex mb-35">
-          <h4 class="px-4">subtotal:<strong class="text-info">5000/-
-          </strong></h4>
+          <h4 class="px-4">subtotal:<strong class="text-info"><?php echo  $total_price?>/-</strong></h4>
           <a href="index.php"><<button class="bg-info px-3 py-2
           border-0 mx-3">Contiune Shopping</button>/a>
           <a href="#"><<button class="bg-secondary p-3 py-2
@@ -183,6 +199,7 @@ cart();
         </div>
     </div>
 </div>
+</form>
 
 <!--last child--> 
 <!--include footer-->
