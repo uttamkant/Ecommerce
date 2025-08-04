@@ -140,21 +140,22 @@ cart();
  global $conn;
     $get_user_id = getUSERId();
     $total=0;
+    $total_price=0;
     $cart_query="Select * from `cart_details` where 
     user_id='$get_user_id'";
     $result=mysqli_query($conn,$cart_query);
     while($row=mysqli_fetch_array($result)){
         $product_id=$row['product_id'];
-        $select_product="Select * from `products`
+        $select_product="Select * from `product`
          where product_id=' $product_id'";
-             $result_products=mysqli_query($conn,$select_products);
-            while($row_product_price=mysqli_fetch_array($result_products)){
-        $product_price=array($row_product_price['product_sprice']); 
-        $price_table=$row_product_price['product_price'];
+             $result_product=mysqli_query($conn,$select_product);
+            while($row_product_price=mysqli_fetch_array($result_product)){
+        $product_price=$row_product_price['product_price']; 
         $product_title=$row_product_price['product_title'];
         $product_image1=$row_product_price['product_image1'];
-        $product_value=array_sum($product_price); //[500]
-        $total_price+=$product_values;//[500]
+         $product_quantity=$row['quantity'];
+        $product_value=$product_price*$product_quantity; //[500]
+        $total_price+=$product_value;//[500]
           
 ?>
               <tr>
@@ -162,7 +163,7 @@ cart();
                 <td><img src="./images/<?php echo $product_image1?>"
                  alt="" class="cart_img"></td>
                 <td><input type="text" name="" id="qty" class="form-input 
-                w-50"></td>
+                w-50" value="<?php echo $product_quantity;?>" ></td>
                 <?php   
                  $get_user_id = getUSERId();
                  if(isset($POST['update_cart'])){
@@ -173,7 +174,8 @@ cart();
                   $total_price=$total_price*$qunatities;
                  }
                 ?>
-                <td><?php echo $price_table?>/-</td>
+                <td><?php echo $product_value?>/-</td>
+
                 <td><input type="checkbox"></td>
                 <td>
                   <!--<button class="bg-info px-3 py-2

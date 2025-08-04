@@ -415,6 +415,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Check if session variables are set
+/*
 if (!empty($_SESSION)) {
     // Print all session variables
     echo '<pre>'; // For better formatting
@@ -423,11 +424,11 @@ if (!empty($_SESSION)) {
 } else {
     echo 'No session variables are set.';
 }
-
+*/
 
 if (isset($_SESSION['userid'])) {
     $userId =    $_SESSION['userid'];
-    echo "User ID: " . $userId;
+   # echo "User ID: " . $userId;
     return $userId;
 } else {
     echo "User is not logged in from here.";
@@ -442,18 +443,19 @@ function cart(){
         $get_product_id=$_GET['add_to_cart'];
 
         $select_query="Select * from `cart_details` where user_id=
-        '$get_user_id'";
-        $result_query=mysqli_query($con,$select_query);    
+        '$get_user_id' and product_id='$get_product_id'";
+        $result_query=mysqli_query($conn,$select_query);    
         $num_of_rows=mysqli_num_rows($result_query);
-        if($num_of_row>0){
+        if($num_of_rows>0){
             
             echo "<script>alert('This item is already present inside the cart')
             </script>";
             echo "<script>window.open('index.php','self')</script>";
 
             }else{
-                $insert_query="insert into `cart_details` (product_id,user_id,quantity) values ($get_user_id,
-                '$user_id','0')";
+                $insert_query="insert into `cart_details` 
+                (product_id,user_id,quantity) values ('$get_product_id',
+                '$get_user_id','0')";
                 $result_query=mysqli_query($conn,$insert_query);
                  echo "<script>alert('Item is added to cart')</script>";
                  echo "<script>window.open('index.php','_self')</script>";
@@ -487,7 +489,7 @@ function cart_item(){
 
 // total price funtion
 function total_cart_price(){
-$total_price=500;
+$total_price=0;
     global $conn;
     $get_user_id = getUSERId();
     $total=0;
@@ -496,13 +498,13 @@ $total_price=500;
     $result=mysqli_query($conn,$cart_query);
     while($row=mysqli_fetch_array($result)){
         $product_id=$row['product_id'];
-        $select_product="Select * from `products`
-         where product_id=' $product_id'";
-             $result_products=mysqli_query($conn,$cart_query);
+        $select_product="Select * from `product`
+         where product_id='$product_id'";
+             $result_products=mysqli_query($conn,$select_product);
             while($row_product_price=mysqli_fetch_array($result_products)){
-        $product_price=array($row_product_price['product_sprice']);  //[200,300]
-        $product_value=array_sum($product_price); //[500]
-        $total_price+=$product_values;//[500]
+                $product_price=$row_product_price['product_price'];  //[200,300]
+                $product_value=$product_price*1; //[500]
+                $total_price+=$product_value;//[500]
             }
     }
     echo $total_price;
