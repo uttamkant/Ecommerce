@@ -77,9 +77,6 @@ hello
 cart();
 ?>
 <!--second child--> 
-<nav class="navbar-navbar-expannd-lg navbar-dark bg-secondary">
-  <ul class="navbar-nav me--auto">
-    <ul class="nav-item">
     <?php
     if (isset($_SESSION['username'])) {
     // If set, display the username
@@ -121,6 +118,7 @@ cart();
 
 <!--fourth child-table-->
 <div class="container">
+<<<<<<< HEAD
     <div class="row">
       <form action="" method="post">
         <table class="table table-bordered text-center">
@@ -171,25 +169,28 @@ cart();
         $product_value=$product_price*$product_quantity; //[500]
         $total_price+=$product_value;//[500]
           
+  <div class="row">
+    <form action="" method="post">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product Title</th>
+          <th>Product Image</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Remove</th>
+          <th>Operations</th>
+        </tr>
+</thead>
+<tbody>
+<?php
+$total_price=20;
+cart_listing();
+>>>>>>> 36a8dfd7715bdc04c6305369a9395406a466d0d9
 ?>
-              <tr>
-                <td><?php echo $product_title?></td>
-                <td><img src="./images/<?php echo $product_image1?>"
-                 alt="" class="cart_img"></td>
-                <td><input type="text" name="" id="qty" class="form-input 
-                w-50" value="<?php echo $product_quantity;?>" ></td>
-                <?php   
-                 $get_user_id = getUSERId();
-                 if(isset($POST['update_cart'])){
-                  $qunatities=$_POST['qty'];
-                  $update_cart="update `cart-details` set quantity=$qunatities where 
-                  _id=user=   $get_user_id";
-                  $result_products_quantity=mysqli_query($conn,$update_cart);
-                  $total_price=$total_price*$qunatities;
-                 }
-                ?>
-                <td><?php echo $product_value?>/-</td>
+  
 
+<<<<<<< HEAD
                 <td><input type="checkbox"></td>
                 <td>
                   <!--<button class="bg-info px-3 py-2
@@ -215,8 +216,34 @@ cart();
           border-0n text-light">Checkout</button>/a>
         </div>
     </div>
+=======
+  <tr>
+    <td>Apple</td>
+    <td><img src="./images/apple.jpg" alt=""></td>
+    <td><input type="text" name="" id=""></td>
+    <td>9000</td>
+    <td><input type="checkbox"></td>
+    <td>
+      <P>Update</p>
+      <p>Remove</p>s
+    </td>
+  </tr>
+</tbody>
+  </table>
+  <!--subtotal--> 
+  <div class="d-flex">
+    <h4 class="px-4">subtotal:<strong class="text-info">
+      <<?php echo $total_price?>/.-</strong></h4>
+    <a href="index.php"><button class="bg info p-3 py-2 border-0">
+      Contiune shopping</button></a>
+      <a href="#"><button class="bg-secondary p-3 border-0">
+      Checkout</button></a>
+  </div>
+  </div>
+>>>>>>> 36a8dfd7715bdc04c6305369a9395406a466d0d9
 </div>
 </form>
+        
 
 <!--last child--> 
 <!--include footer-->
