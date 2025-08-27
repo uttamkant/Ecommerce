@@ -50,7 +50,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
           <a class="nav-link" href="#">contact</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping">
+          <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping">
        </i><sup><?php 
       cart_item();?></sup></a>
         </li>

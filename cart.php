@@ -77,9 +77,6 @@ hello
 cart();
 ?>
 <!--second child--> 
-<nav class="navbar-navbar-expannd-lg navbar-dark bg-secondary">
-  <ul class="navbar-nav me--auto">
-    <ul class="nav-item">
     <?php
     if (isset($_SESSION['username'])) {
     // If set, display the username
@@ -121,87 +118,52 @@ cart();
 
 <!--fourth child-table-->
 <div class="container">
-    <div class="row">
-      <form action="" method="post">
-        <table class="table table-bordered text-center">
-            <thead>
-                <tr>
-                   <th>Product Title</th>
-                   <th>Product Image</th>
-                   <th>Quantity</th>
-                   <th>Total Price</th>
-                   <th>Remove</th>
-                   <th colspan="2">Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-              <!--php code to display data-->
-              <?php
- global $conn;
-    $get_user_id = getUSERId();
-    $total=0;
-    $total_price=0;
-    $cart_query="Select * from `cart_details` where 
-    user_id='$get_user_id'";
-    $result=mysqli_query($conn,$cart_query);
-    while($row=mysqli_fetch_array($result)){
-        $product_id=$row['product_id'];
-        $select_product="Select * from `product`
-         where product_id=' $product_id'";
-             $result_product=mysqli_query($conn,$select_product);
-            while($row_product_price=mysqli_fetch_array($result_product)){
-        $product_price=$row_product_price['product_price']; 
-        $product_title=$row_product_price['product_title'];
-        $product_image1=$row_product_price['product_image1'];
-         $product_quantity=$row['quantity'];
-        $product_value=$product_price*$product_quantity; //[500]
-        $total_price+=$product_value;//[500]
-          
+  <div class="row">
+    <form action="" method="post">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product Title</th>
+          <th>Product Image</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Remove</th>
+          <th>Operations</th>
+        </tr>
+</thead>
+<tbody>
+<?php
+$total_price=20;
+cart_listing();
 ?>
-              <tr>
-                <td><?php echo $product_title?></td>
-                <td><img src="./images/<?php echo $product_image1?>"
-                 alt="" class="cart_img"></td>
-                <td><input type="text" name="" id="qty" class="form-input 
-                w-50" value="<?php echo $product_quantity;?>" ></td>
-                <?php   
-                 $get_user_id = getUSERId();
-                 if(isset($POST['update_cart'])){
-                  $qunatities=$_POST['qty'];
-                  $update_cart="update `cart-details` set quantity=$qunatities where 
-                  _id=user=   $get_user_id";
-                  $result_products_quantity=mysqli_query($conn,$update_cart);
-                  $total_price=$total_price*$qunatities;
-                 }
-                ?>
-                <td><?php echo $product_value?>/-</td>
+  
 
-                <td><input type="checkbox"></td>
-                <td>
-                  <!--<button class="bg-info px-3 py-2
-                   border-0 mx-3">Update</button>-->
-                   <input type="sumbit" value="update Cart"
-                   class="bg-info px-3 py-2 border-0 mx-3" name="update_cart">
-                   <button class="bg-info px-3 py-2
-                    border-0 mx-3">Removes</button>
-                  
-                </td>
-              </tr>
-              <?php }}?>
-         
-          </tbody>
-        </table>
-        <!--subtotal--> 
-        <div class="d-flex mb-35">
-          <h4 class="px-4">subtotal:<strong class="text-info"><?php echo  $total_price?>/-</strong></h4>
-          <a href="index.php"><<button class="bg-info px-3 py-2
-          border-0 mx-3">Contiune Shopping</button>/a>
-          <a href="#"><<button class="bg-secondary p-3 py-2
-          border-0n text-light">Checkout</button>/a>
-        </div>
-    </div>
+  <tr>
+    <td>Apple</td>
+    <td><img src="./images/apple.jpg" alt=""></td>
+    <td><input type="text" name="" id=""></td>
+    <td>9000</td>
+    <td><input type="checkbox"></td>
+    <td>
+      <P>Update</p>
+      <p>Remove</p>s
+    </td>
+  </tr>
+</tbody>
+  </table>
+  <!--subtotal--> 
+  <div class="d-flex">
+    <h4 class="px-4">subtotal:<strong class="text-info">
+      <<?php echo $total_price?>/.-</strong></h4>
+    <a href="index.php"><button class="bg info p-3 py-2 border-0">
+      Contiune shopping</button></a>
+      <a href="#"><button class="bg-secondary p-3 border-0">
+      Checkout</button></a>
+  </div>
+  </div>
 </div>
 </form>
+        
 
 <!--last child--> 
 <!--include footer-->

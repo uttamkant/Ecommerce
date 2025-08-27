@@ -475,12 +475,11 @@ function cart_item(){
         $count_cart_items=mysqli_num_rows($result_query);
         if( $count_cart_items>0){
             }else{
-             $get_product_id=$_GET['add_to_cart'];
-       $insert_query="insert into `cart_details`
-        (product_id,user_id,quantity) values ($get_product_id,'$get_user_id',0)";
-        $result_query=mysqli_query($conn,$insert_query);
-        echo "<script>alert('Item is added to cart')</script>";
-        echo "<script>window.open('index.php','_self')<?script>";
+            global $con;
+            $userId = getUSERId();
+            $select_query="Select * from `cart_details` where user_id='$get_user_id'";
+            $result_query=mysqli_query($con,$select_query);
+            $count_cart_items=mysqli_num_rows($result_query);
     }
 }
 }
@@ -509,5 +508,29 @@ $total_price=0;
     }
     echo $total_price;
 }
+
+
+// funtion to get cart item numbers
+function cart_listing(){
+
+        $get_user_id= getUSERId();
+         global $conn;
+       echo $get_user_id;
+        $select_query="Select * from `cart_details` where user_id='$get_user_id'";
+        $result_query=mysqli_query($conn,$select_query);    
+        $count_cart_items=mysqli_num_rows($result_query);
+        if( $count_cart_items>0){
+                ?>
+                <p>there is multiple items in the cart</p>
+                <?php
+
+            }else{
+                ?>
+                <p>there is no items in the cart</p>
+                <?php
+    }
+}
+
+
 ?>
 
