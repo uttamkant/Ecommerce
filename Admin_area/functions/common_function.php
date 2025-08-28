@@ -516,39 +516,37 @@ function cart_listing(){
         $get_user_id= getUSERId();
          global $conn;
        echo $get_user_id;
-        $select_query="Select * from `cart_details` where user_id='$get_user_id'";
+      $select_query="SELECT * FROM `product` as p, `cart_details` as c WHERE c.product_id=p.product_id and  user_id='$get_user_id'";
+    //    $select_query="Select * from `cart_details` where user_id='$get_user_id'";
         $result_query=mysqli_query($conn,$select_query);    
         $count_cart_items=mysqli_num_rows($result_query);
         if( $count_cart_items>0){
-                
+                ?>
                 <p>there is multiple items in the cart</p>
-                while($row=mysqli_fetch_assoc($result_query))}
-                $product_title=$row['Product_Title'];
-                $product_image=$row['Product_image';]
-                $Quantity=$row['Quantity'];
-                $total_price=$row['total_price'];
-                $Remove=$row['Remove'];
-                $Operations=$row['Operations'];
-
-                echo 
-                <div class='col-md-4 mb-4'>
-                <div class='card'>
-                <img src="./Admin_area/product_images/" alt="product_title">
-                <p>$product_image</p>
-                   <p>$Quantity</p>
-                   <p>$total_price</p>
-                   <p>$Remove</p>
-                   <p>$Operations</p>
-                </div>
-                    </div>
-
+<?php
+                while($row=mysqli_fetch_assoc($result_query)){
+                $product_title=$row['product_title'];
+                $product_image=$row['product_image1'];
+                $Quantity=$row['quantity'];
+               $product_id=$row['product_id'];
+               $product_price=$row['product_price'];
+                echo "
+                       <tr>
+                     <td>$product_title</td>
+                      <td><img src='./images/$product_image' alt=''></td>
+                      <td><input type='text' name='' id='$product_id'></td>
+                      <td>$product_price</td>
+                       <td><input type='checkbox'></td>
+                       <td>
+                        <p>Update</p>
+                        <p>Remove</p>
+                       </td>
+</tr>";
+                }
             }else{
                 ?>
                 <p>there is no items in the cart</p>
                 <?php
-    }
-}
-
-
+    }}
 ?>
 

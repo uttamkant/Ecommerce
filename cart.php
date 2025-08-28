@@ -118,7 +118,7 @@ cart();
 
 <!--fourth child-table-->
 <div class="container">
-<<<<<<< HEAD
+
     <div class="row">
       <form action="" method="post">
         <table class="table table-bordered text-center">
@@ -133,7 +133,7 @@ cart();
                 </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
+
                 <tr>
                      <td>Apple</td>
                       <td><img src="./images/apple.jpg" alt=""></td>
@@ -146,7 +146,7 @@ cart();
                        </td>
 </tr>
 </tbody>
-=======
+
               <!--php code to display data-->
               <?php
  global $conn;
@@ -170,10 +170,9 @@ cart();
         $total_price+=$product_value;//[500]
             }
           }
-          
-  <div class="row">
-    <form action="" method="post">
-    <table class="table table-bordered">
+           echo "<div class='row'>
+    <form action'#'method='post'>
+    <table class='table table-bordered'>
       <thead>
         <tr>
           <th>Product Title</th>
@@ -184,15 +183,14 @@ cart();
           <th>Operations</th>
         </tr>
 </thead>
-<tbody>
-<?php
+<tbody>";
+
 $total_price=20;
 cart_listing();
->>>>>>> 36a8dfd7715bdc04c6305369a9395406a466d0d9
 ?>
   
 
-<<<<<<< HEAD
+
                 <td><input type="checkbox"></td>
                 <td>
                   <!--<button class="bg-info px-3 py-2
@@ -204,10 +202,10 @@ cart_listing();
                   
                 </td>
               </tr>
-              <?php }}?>
+              <?php
+              ?>
          
-          </tbody>
->>>>>>> adfae72ffcdaa5dbe99a6779a41aad481bed8fe7
+          </tbody
         </table>
         <!--subtotal--> 
         <div class="d-flex mb-35">
@@ -218,7 +216,6 @@ cart_listing();
           border-0n text-light">Checkout</button>/a>
         </div>
     </div>
-=======
   <tr>
     <td>Apple</td>
     <td><img src="./images/apple.jpg" alt=""></td>
@@ -242,7 +239,7 @@ cart_listing();
       Checkout</button></a>
   </div>
   </div>
->>>>>>> 36a8dfd7715bdc04c6305369a9395406a466d0d9
+
 </div>
 </form>
         
