@@ -168,6 +168,8 @@ cart();
          $product_quantity=$row['quantity'];
         $product_value=$product_price*$product_quantity; //[500]
         $total_price+=$product_value;//[500]
+            }
+          }
           
   <div class="row">
     <form action="" method="post">

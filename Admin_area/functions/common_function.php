@@ -520,9 +520,27 @@ function cart_listing(){
         $result_query=mysqli_query($conn,$select_query);    
         $count_cart_items=mysqli_num_rows($result_query);
         if( $count_cart_items>0){
-                ?>
+                
                 <p>there is multiple items in the cart</p>
-                <?php
+                while($row=mysqli_fetch_assoc($result_query))}
+                $product_title=$row['Product_Title'];
+                $product_image=$row['Product_image';]
+                $Quantity=$row['Quantity'];
+                $total_price=$row['total_price'];
+                $Remove=$row['Remove'];
+                $Operations=$row['Operations'];
+
+                echo 
+                <div class='col-md-4 mb-4'>
+                <div class='card'>
+                <img src="./Admin_area/product_images/" alt="product_title">
+                <p>$product_image</p>
+                   <p>$Quantity</p>
+                   <p>$total_price</p>
+                   <p>$Remove</p>
+                   <p>$Operations</p>
+                </div>
+                    </div>
 
             }else{
                 ?>

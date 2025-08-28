@@ -53,7 +53,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
 <<<<<<< HEAD
           <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i>
        <sup><?php 
-=======
+=====
           <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping">
        </i><sup><?php 
 >>>>>>> 36a8dfd7715bdc04c6305369a9395406a466d0d9
