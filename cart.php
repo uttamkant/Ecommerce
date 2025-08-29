@@ -117,35 +117,6 @@ cart();
 </div>
 
 <!--fourth child-table-->
-<div class="container">
-
-    <div class="row">
-      <form action="" method="post">
-        <table class="table table-bordered text-center">
-            <thead>
-                <tr>
-                   <th>Product Title</th>
-                   <th>Product Image</th>
-                   <th>Quantity</th>
-                   <th>Total Price</th>
-                   <th>Remove</th>
-                   <th colspan="2">Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-                     <td>Apple</td>
-                      <td><img src="./images/apple.jpg" alt=""></td>
-                      <td><input type="text" name="" id=""></td>
-                      <td>9000</td>
-                       <td><input type="checkbox"></td>
-                       <td>
-                        <p>Update</p>
-                        <p>Remove</p>
-                       </td>
-</tr>
-</tbody>
 
               <!--php code to display data-->
               <?php
@@ -217,15 +188,7 @@ cart_listing();
         </div>
     </div>
   <tr>
-    <td>Apple</td>
-    <td><img src="./images/apple.jpg" alt=""></td>
-    <td><input type="text" name="" id=""></td>
-    <td>9000</td>
-    <td><input type="checkbox"></td>
-    <td>
-      <P>Update</p>
-      <p>Remove</p>s
-    </td>
+  
   </tr>
 </tbody>
   </table>
