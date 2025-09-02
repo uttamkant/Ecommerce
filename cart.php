@@ -120,7 +120,8 @@ cart();
 
               <!--php code to display data-->
               <?php
- global $conn;
+
+  global $conn;
     $get_user_id = getUSERId();
     $total=0;
     $total_price=0;
@@ -158,19 +159,32 @@ cart();
 
 $total_price=20;
 cart_listing();
+
+
+$get_user_id = getUSERId(); 
+if(isset($_POST['update_cart'])){
+  $qunatities=$_POST['qty'];
+  $update_cart="update `cart_details` set  quantity=$qunatities where 
+  user_id=$get_user_id";
+  $result_products_quantity=mysqli_query($conn,$update_cart);
+  $total_price=$total_price*$qunatities;
+}
+
 ?>
-  
+
 
 
                 <td><input type="checkbox"></td>
                 <td>
                   <!--<button class="bg-info px-3 py-2
                    border-0 mx-3">Update</button>-->
-                   <input type="sumbit" value="update Cart"
-                   class="bg-info px-3 py-2 border-0 mx-3" name="update_cart">
+                   <input type="sumbit" value="Update Cart"
+                   class="bg-info px-3 py-2 border-0 mx-3">
+                  
+                   
                    <button class="bg-info px-3 py-2
                     border-0 mx-3">Removes</button>
-                  
+
                 </td>
               </tr>
               <?php
@@ -179,8 +193,9 @@ cart_listing();
           </tbody
         </table>
         <!--subtotal--> 
-        <div class="d-flex mb-35">
-          <h4 class="px-4">subtotal:<strong class="text-info"><?php echo  $total_price?>/-</strong></h4>
+        <div class="d                    -flex mb-35">
+          <h4 class="px-4">subtotal:<strong class="text-info">
+            <?php echo  $total_price?>/-</strong></h4>
           <a href="index.php"><<button class="bg-info px-3 py-2
           border-0 mx-3">Contiune Shopping</button>/a>
           <a href="#"><<button class="bg-secondary p-3 py-2
