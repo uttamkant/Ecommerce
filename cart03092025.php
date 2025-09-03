@@ -118,8 +118,33 @@ cart();
 
 <!--fourth child-table-->
 
-<!--cart_items with update form--> 
-<table class='table table-bordered'>
+              <!--php code to display data-->
+              <?php
+
+  global $conn;
+    $get_user_id = getUSERId();
+    $total=0;
+    $total_price=0;
+    $cart_query="Select * from `cart_details` where 
+    user_id='$get_user_id'";
+    $result=mysqli_query($conn,$cart_query);
+    while($row=mysqli_fetch_array($result)){
+        $product_id=$row['product_id'];
+        $select_product="Select * from `product`
+         where product_id=' $product_id'";
+             $result_product=mysqli_query($conn,$select_product);
+            while($row_product_price=mysqli_fetch_array($result_product)){
+        $product_price=$row_product_price['product_price']; 
+        $product_title=$row_product_price['product_title'];
+        $product_image1=$row_product_price['product_image1'];
+         $product_quantity=$row['quantity'];
+        $product_value=$product_price*$product_quantity; //[500]
+        $total_price+=$product_value;//[500]
+            }
+          }
+           echo "<div class='row'>
+    <form action'#'method='post'>
+    <table class='table table-bordered'>
       <thead>
         <tr>
           <th>Product Title</th>
@@ -130,72 +155,70 @@ cart();
           <th>Operations</th>
         </tr>
 </thead>
-<tbody>
-<!--each cart item to be displayed--> 
-<?php
-        $get_user_id= getUSERId();
-         global $conn;
-       echo $get_user_id;
-      $select_query="SELECT * FROM `product` as p, `cart_details` as c WHERE c.product_id=p.product_id and  user_id='$get_user_id'";
-    //    $select_query="Select * from `cart_details` where user_id='$get_user_id'";
-        $result_query=mysqli_query($conn,$select_query);    
-        $count_cart_items=mysqli_num_rows($result_query);
-        if( $count_cart_items>0){
-                ?>
-                <p>there is multiple items in the cart</p>
-<?php
-                while($row=mysqli_fetch_assoc($result_query)){
-                $product_title=$row['product_title'];
-                $product_image=$row['product_image1'];
-                $Quantity=$row['quantity'];
-               $product_id=$row['product_id'];
-               $product_price=$row['product_price']*$Quantity;
-                echo "
-                       <tr>
-                     <td>$product_title</td>
-                      <td><img src='./images/$product_image' 
-                      alt=''></td>
-                      <td><input type='text' name='qty'
-                       value='$Quantity'id='$product_id'>
-                       <?php
-                        $get_user_id= getUSERId();
-                        if(isset($POST['update_cart'])){
-                          $quanatities=$_POST['qty'];
-                          $
-                        }
-                       </td>
-                      <td>$product_price</td>
-                       <td><input type='checkbox'></td>
-                      
-                <td>
-                  
-                  <input type='submit' value='Update Cart' 
-                  class='bg-info px-3 py-2
-                  border-0 mx-3' name='update_cart'>
-                   
-                   <button class='bg-info px-3 py-2
-                    border-0 mx-3'>Removes</button>
+<tbody>";
 
-                </td>
+$total_price=20;
+cart_listing();
 
-</tr>";
-                }
-            }else{
-                ?>
-                <p>there is no items in the cart</p>
-                <?php
-    }
+
+$get_user_id = getUSERId(); 
+if(isset($_POST['update_cart'])){
+  $qunatities=$_POST['qty'];
+  $update_cart="update `cart_details` set  quantity=$qunatities where 
+  user_id=$get_user_id";
+  $result_products_quantity=mysqli_query($conn,$update_cart);
+  $total_price=$total_price*$qunatities;
+}
+
 ?>
 
 
 
+                <td><input type="checkbox"></td>
+                <td>
+                  <!--<button class="bg-info px-3 py-2
+                   border-0 mx-3">Update</button>-->
+                  <input type="submit" value="Update Cart" class="bg-info px-3 py-2
+                  border-0 mx-3" name="update_cart">
+                   
+                   <button class="bg-info px-3 py-2
+                    border-0 mx-3">Removes</button>
 
-
-
-
-
+                </td>
+              </tr>
+              <?php
+              ?>
+         
+          </tbody
+        </table>
+        <!--subtotal--> 
+        <div class="d                    -flex mb-35">
+          <h4 class="px-4">subtotal:<strong class="text-info">
+            <?php echo  $total_price?>/-</strong></h4>
+          <a href="index.php"><<button class="bg-info px-3 py-2
+          border-0 mx-3">Contiune Shopping</button>/a>
+          <a href="#"><<button class="bg-secondary p-3 py-2
+          border-0n text-light">Checkout</button>/a>
+        </div>
+    </div>
+  <tr>
+  
+  </tr>
 </tbody>
-</table>
+  </table>
+  <!--subtotal--> 
+  <div class="d-flex">
+    <h4 class="px-4">subtotal:<strong class="text-info">
+      <<?php echo $total_price?>/.-</strong></h4>
+    <a href="index.php"><button class="bg info p-3 py-2 border-0">
+      Contiune shopping</button></a>
+      <a href="#"><button class="bg-secondary p-3 border-0">
+      Checkout</button></a>
+  </div>
+  </div>
+
+</div>
+</form>
         
 
 <!--last child--> 
