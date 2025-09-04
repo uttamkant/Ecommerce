@@ -157,28 +157,62 @@ cart();
                       alt=''></td>
                       <td><input type='text' name='qty'
                        value='$Quantity'id='$product_id'>
-                       <?php
-                        $get_user_id= getUSERId();
-                        if(isset($POST['update_cart'])){
-                          $quanatities=$_POST['qty'];
-                          $
-                        }
+
+         $get_user_id= getUSERId();
+         if(isset($_POST['update'])){=
+           $quantities=$_POST['qty'];
+           $update_cart='update `cart_details` set quantity=$quantities where
+           user_id=$get_user_id';
+           $result_products=mysqli_query($conn,$update_cart);
+           $total_price=$total_price*$quantities;
+           }               
+                       
                        </td>
                       <td>$product_price</td>
-                       <td><input type='checkbox'></td>
+                       <td><input type='checkbox' name='removeitem[]' value='<?php echo
+                        $product_id ?>'></td>
                       
                 <td>
-                  
+                  <form>
                   <input type='submit' value='Update Cart' 
                   class='bg-info px-3 py-2
                   border-0 mx-3' name='update_cart'>
                    
-                   <button class='bg-info px-3 py-2
-                    border-0 mx-3'>Removes</button>
+                   <!--<button class='bg-info px-3 py-2
+                    border-0 mx-3'>Removes</button>-->
+                    <input type='submit' value='Update Cart' 
+                  class='bg-info px-3 py-2
+                  border-0 mx-3' name='remove_cart'>
 
                 </td>
-
+</form>
 </tr>";
+
+
+<!--function to remove items--> 
+   <?php 
+   function remove_cart_item(){
+    global $conn;
+    if(isset($POST['remove_cart'])){
+      foreach($_POST['removeitem']as $remove_id){
+        echo $remove_id;
+        $delete_query="Delete from `cart_details` where product_id=$remove_id";
+        $run_delete=mysqli_query($conn,$delete_query);
+        if($run_delete){
+          echo "<script>windows.open('cart.php','self)'</script>"
+        
+        }
+      }
+    }
+   }
+   echo $remove_item=remove_cart_item();
+   
+   
+   
+   
+   
+   
+   ?>
                 }
             }else{
                 ?>

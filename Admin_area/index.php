@@ -83,7 +83,7 @@
     }
 
      if(isset($_GET['insert_product'])){
-    include('insert_product.php');
+   include('insert_product.php');
     }
     ?>
 </div>

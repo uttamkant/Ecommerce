@@ -5,7 +5,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
 // Assuming you have already established a connection in $conn
 
 // Define the SQL INSERT query
-$insert_product = "INSERT INTO products (name, price, quantity) VALUES ('Apple', 1.00, 10)";
+$insert_product = "INSERT INTO product (name, price, quantity) VALUES ('Apple', 1.00, 10)";
 
 // Check if the query is not empty
 if (!empty($insert_product)) {
