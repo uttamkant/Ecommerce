@@ -6,6 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
+
+         if(isset($_POST['update'])){
+                   echo "<script>alert('update button clicked')</script>";
+            }               
+        
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +69,7 @@ hello
          <li class="nav-item">
           <a class="nav-link" href="cart.php">cart <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M0 32C0 14.3 14.3 0 32 0L48 0c44.2 0 80 35.8 80 80l0 288c0 8.8 7.2 16 16 16l464 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-66.7 0c1.8 5 2.7 10.4 2.7 16c0 26.5-21.5 48-48 48s-48-21.5-48-48c0-5.6 1-11 2.7-16l-197.5 0c1.8 5 2.7 10.4 2.7 16c0 26.5-21.5 48-48 48s-48-21.5-48-48c0-5.6 1-11 2.7-16L144 448c-44.2 0-80-35.8-80-80L64 80c0-8.8-7.2-16-16-16L32 64C14.3 64 0 49.7 0 32zM432 96l0-40c0-4.4-3.6-8-8-8l-80 0c-4.4 0-8 3.6-8 8l0 40 96 0zM288 96l0-40c0-30.9 25.1-56 56-56l80 0c30.9 0 56 25.1 56 56l0 40 0 224-192 0 0-224zM512 320l0-224 16 0c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48l-16 0zM240 96l16 0 0 224-16 0c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48z"/></svg></a>
         </li>
-       
+       <li>
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
@@ -77,6 +83,9 @@ hello
 cart();
 ?>
 <!--second child--> 
+<nav>
+  <ul>
+    <li>
     <?php
     if (isset($_SESSION['username'])) {
     // If set, display the username
@@ -107,7 +116,7 @@ cart();
 }
 
   ?>
-    </ul>
+    </li>
   </ul>
 </nav>
 <!--third child--> 
@@ -135,15 +144,13 @@ cart();
 <?php
         $get_user_id= getUSERId();
          global $conn;
-       echo $get_user_id;
+       
       $select_query="SELECT * FROM `product` as p, `cart_details` as c WHERE c.product_id=p.product_id and  user_id='$get_user_id'";
     //    $select_query="Select * from `cart_details` where user_id='$get_user_id'";
         $result_query=mysqli_query($conn,$select_query);    
         $count_cart_items=mysqli_num_rows($result_query);
         if( $count_cart_items>0){
-                ?>
-                <p>there is multiple items in the cart</p>
-<?php
+              
                 while($row=mysqli_fetch_assoc($result_query)){
                 $product_title=$row['product_title'];
                 $product_image=$row['product_image1'];
@@ -151,47 +158,42 @@ cart();
                $product_id=$row['product_id'];
                $product_price=$row['product_price']*$Quantity;
                 echo "
+
                        <tr>
+                       <form>
                      <td>$product_title</td>
                       <td><img src='./images/$product_image' 
-                      alt=''></td>
-                      <td><input type='text' name='qty'
-                       value='$Quantity'id='$product_id'>
+                      alt=''/></td>
+                      <td>
+                                      
+                      <input type='text' name='qty'
+                       value='$Quantity' id='$product_id'/>";
 
-         $get_user_id= getUSERId();
-         if(isset($_POST['update'])){=
-           $quantities=$_POST['qty'];
-           $update_cart='update `cart_details` set quantity=$quantities where
-           user_id=$get_user_id';
-           $result_products=mysqli_query($conn,$update_cart);
-           $total_price=$total_price*$quantities;
-           }               
                        
-                       </td>
+                     echo "</td>
                       <td>$product_price</td>
-                       <td><input type='checkbox' name='removeitem[]' value='<?php echo
-                        $product_id ?>'></td>
+                       <td><input type='checkbox' name='removeitem[]' value='$product_id'/></td>
                       
                 <td>
-                  <form>
-                  <input type='submit' value='Update Cart' 
+                  
+                  <input type='submit' value='Update item' 
                   class='bg-info px-3 py-2
-                  border-0 mx-3' name='update_cart'>
+                  border-0 mx-3' name='update'>
                    
                    <!--<button class='bg-info px-3 py-2
                     border-0 mx-3'>Removes</button>-->
-                    <input type='submit' value='Update Cart' 
+                    <input type='submit' value='Remove Item' 
                   class='bg-info px-3 py-2
-                  border-0 mx-3' name='remove_cart'>
+                  border-0 mx-3' name='remove'>
 
                 </td>
 </form>
 </tr>";
-
+?>
 
 <!--function to remove items--> 
    <?php 
-   function remove_cart_item(){
+   /*function remove_cart_item(){
     global $conn;
     if(isset($POST['remove_cart'])){
       foreach($_POST['removeitem']as $remove_id){
@@ -199,20 +201,20 @@ cart();
         $delete_query="Delete from `cart_details` where product_id=$remove_id";
         $run_delete=mysqli_query($conn,$delete_query);
         if($run_delete){
-          echo "<script>windows.open('cart.php','self)'</script>"
+          echo "<script>windows.open('cart.php','self)'</script>";
         
         }
       }
     }
-   }
-   echo $remove_item=remove_cart_item();
+   }*/
+  //echo $remove_item=remove_cart_item();
    
    
    
    
    
    
-   ?>
+   
                 }
             }else{
                 ?>
