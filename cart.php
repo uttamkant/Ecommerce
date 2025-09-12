@@ -8,7 +8,10 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_function.php");
 
          if(isset($_POST['update'])){
-                   echo "<script>alert('update button clicked')</script>";
+update_cart();
+
+
+
             }               
         
 
@@ -160,14 +163,14 @@ cart();
                 echo "
 
                        <tr>
-                       <form>
+                       <form method='POST'>
                      <td>$product_title</td>
                       <td><img src='./images/$product_image' 
                       alt=''/></td>
                       <td>
                                       
                       <input type='text' name='qty'
-                       value='$Quantity' id='$product_id'/>";
+                       value='$Quantity' id='$Quantity'/>";
 
                        
                      echo "</td>
@@ -175,7 +178,8 @@ cart();
                        <td><input type='checkbox' name='removeitem[]' value='$product_id'/></td>
                       
                 <td>
-                  
+                  <input type='hidden' value='$product_id' name='pid'/>
+                
                   <input type='submit' value='Update item' 
                   class='bg-info px-3 py-2
                   border-0 mx-3' name='update'>

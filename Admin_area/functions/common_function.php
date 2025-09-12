@@ -463,7 +463,36 @@ function cart(){
     }
 }
 
+function update_cart(){
 
+    echo "<script>alert('update button clicked')</script>";
+
+    $product_id = htmlspecialchars($_POST['pid']);
+    $Quantity = htmlspecialchars($_POST['qty']);
+    echo "<script>alert('update button clicked'+$product_id+$Quantity )</script>";
+    global $conn;
+    $get_user_id= getUSERId();
+   
+ echo "<script>alert('update button clicked'+$product_id+$Quantity+$get_user_id )</script>";
+    $select_query="Select * from `cart_details` where user_id='$get_user_id' and product_id='$product_id'";
+    $result_query=mysqli_query($conn,$select_query);    
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows>0){
+         echo "<script>alert('Update has been requested')
+            </script>";
+            $update_query="update `cart_details` set `quantity`='$Quantity' where user_id='$get_user_id' and product_id='$product_id'";
+              
+                $result_query=mysqli_query($conn,$update_query);
+
+            }else{
+               
+                 echo "<script>alert('cart item not presant')</script>";
+                 echo "<script>window.open('index.php','_self')</script>";
+            }    
+
+    
+
+}
 // funtion to get cart item numbers
 function cart_item(){
     if(isset($_GET['add_to_cart'])){
