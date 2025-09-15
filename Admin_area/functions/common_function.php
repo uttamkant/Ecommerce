@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Start the session if not already started
+}
 // including connect file
 include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/includes/connect.php");
 
@@ -410,12 +412,26 @@ function getUSERId(){
 
 
 // Check if the session is already started
+
 if (session_status() === PHP_SESSION_NONE) {
+     echo "<script>alert('session is not present')
+            </script>";
     session_start(); // Start the session if not already started
+}
+if (session_status() === PHP_SESSION_ACTIVE) {
+    $uid=$_SESSION['userid'];
+     echo "<script>alert('session is active') </script>";
+      echo "<script>alert($uid) </script>";
+   
+}
+if (session_status() === PHP_SESSION_DISABLED) {
+     echo "<script>alert('session is disabled')
+            </script>";
+   
 }
 
 // Check if session variables are set
-/*
+
 if (!empty($_SESSION)) {
     // Print all session variables
     echo '<pre>'; // For better formatting
@@ -424,14 +440,18 @@ if (!empty($_SESSION)) {
 } else {
     echo 'No session variables are set.';
 }
-*/
 
+ $status=session_status();
 if (isset($_SESSION['userid'])) {
-    $userId =    $_SESSION['userid'];
+    $userId =$_SESSION['userid'];
+   
    # echo "User ID: " . $userId;
+   echo "<script>alert('user id is present'+$userId+$status)
+            </script>";
     return $userId;
 } else {
-    echo "User is not logged in from here.";
+    echo "<script>alert('user id is not presant'+$status)
+            </script>";
     return null;
 }
 
@@ -471,7 +491,7 @@ function update_cart(){
     $Quantity = htmlspecialchars($_POST['qty']);
     echo "<script>alert('update button clicked'+$product_id+$Quantity )</script>";
     global $conn;
-    $get_user_id= getUSERId();
+    $get_user_id=getUSERId();
    
  echo "<script>alert('update button clicked'+$product_id+$Quantity+$get_user_id )</script>";
     $select_query="Select * from `cart_details` where user_id='$get_user_id' and product_id='$product_id'";
