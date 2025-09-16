@@ -418,6 +418,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </script>";
     session_start(); // Start the session if not already started
 }
+/*
 if (session_status() === PHP_SESSION_ACTIVE) {
     $uid=$_SESSION['userid'];
      echo "<script>alert('session is active') </script>";
@@ -429,14 +430,14 @@ if (session_status() === PHP_SESSION_DISABLED) {
             </script>";
    
 }
-
+*/
 // Check if session variables are set
 
 if (!empty($_SESSION)) {
     // Print all session variables
-    echo '<pre>'; // For better formatting
-    print_r($_SESSION);
-    echo '</pre>';
+  //  echo '<pre>'; // For better formatting
+    //print_r($_SESSION);
+    //echo '</pre>';
 } else {
     echo 'No session variables are set.';
 }
@@ -513,6 +514,42 @@ function update_cart(){
     
 
 }
+
+    // funtion remove cart
+function Remove_item(){
+
+echo "<script>alert('remove button clicked')</script>";
+
+    $product_id = htmlspecialchars($_POST['pid']);
+    $Quantity = htmlspecialchars($_POST['qty']);
+    echo "<script>alert('remove button clicked'+$product_id+$Quantity )</script>";
+    global $conn;
+    $get_user_id=getUSERId();
+   
+ echo "<script>alert('remove button clicked'+$product_id+$Quantity+$get_user_id )</script>";
+    $select_query="Select * from `cart_details` where user_id='$get_user_id' and product_id='$product_id'";
+    $result_query=mysqli_query($conn,$select_query);    
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows>0){
+         echo "<script>alert('remove has been requested')
+            </script>";
+            $update_query="delete from `cart_details` where user_id='$get_user_id' and product_id='$product_id'";
+              
+                $result_query=mysqli_query($conn,$update_query);
+
+            }else{
+               
+                 echo "<script>alert('cart item not presant')</script>";
+                 echo "<script>window.open('index.php','_self')</script>";
+            }    
+
+    
+
+
+
+}
+
+
 // funtion to get cart item numbers
 function cart_item(){
     if(isset($_GET['add_to_cart'])){

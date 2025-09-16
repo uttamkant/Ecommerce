@@ -13,7 +13,9 @@ update_cart();
 
 
             }               
-        
+        if(isset($_POST['remove'])){
+          Remove_item();
+        }
 
 ?>
 
@@ -152,6 +154,7 @@ cart();
     //    $select_query="Select * from `cart_details` where user_id='$get_user_id'";
         $result_query=mysqli_query($conn,$select_query);    
         $count_cart_items=mysqli_num_rows($result_query);
+        $total_price=0;
         if( $count_cart_items>0){
               
                 while($row=mysqli_fetch_assoc($result_query)){
@@ -160,6 +163,7 @@ cart();
                 $Quantity=$row['quantity'];
                $product_id=$row['product_id'];
                $product_price=$row['product_price']*$Quantity;
+               $total_price=$total_price+$product_price;
                 echo "
 
                        <tr>
@@ -225,6 +229,15 @@ cart();
                 <p>there is no items in the cart</p>
                 <?php
     }
+    echo "</table><div class='d-flex'>
+    <h4 class='px-4'>subtotal:<strong class='text-info'>
+      $total_price/.-</strong></h4>
+    <a href='index.php'><button class='bg info p-3 py-2 border-0'>
+      Contiune shopping</button></a>
+      <a href='#'><button class='bg-secondary p-3 border-0'>
+      Checkout</button></a>
+  </div>";
+  
 ?>
 
 
