@@ -44,7 +44,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/Ecommerce/Admin_area/functions/common_functi
           <a class="nav-link" href="display_all.php">product</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="#">register</a>
+          <a class="nav-link" href="user_area/user_registration.php">register</a>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="#">contact</a>
@@ -92,6 +92,7 @@ cart();
     // If not set, display the default message
     echo '<a class="nav-link" href="#">Welcome Guest</a>';
 }
+
     ?>
 </li>
 <li class="nav-item">
